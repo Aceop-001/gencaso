@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "./Logo";
+import { LivingLogo } from "./LivingLogo";
 import { SiteFooter } from "./Socials";
 
 /** Shared layout for text pages (Docs, Legal): header, title, sticky contents list, footer. */
@@ -23,10 +23,13 @@ export function Subpage({
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[520px]" style={{ background: "radial-gradient(60% 80% at 20% 0%, rgba(61,123,255,.18), transparent 70%), radial-gradient(50% 70% at 90% 10%, rgba(139,108,255,.12), transparent 70%)" }} />
 
       <header className="relative z-20 mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60" aria-label="Gencaso home">
-          <Logo size={32} />
-          <span className="block pr-[0.08em] font-serif text-[26px] italic leading-none tracking-[-0.01em] text-white">Gencaso</span>
-        </Link>
+        <div className="flex items-center gap-2.5">
+          {/* Same living jellyfish as the homepage: touch it and it dodges, then comes back */}
+          <LivingLogo />
+          <Link href="/" className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60" aria-label="Gencaso home">
+            <span className="block pr-[0.08em] font-serif text-[26px] italic leading-none tracking-[-0.01em] text-white">Gencaso</span>
+          </Link>
+        </div>
         <Link href="/" className="rounded-full border border-line px-4 py-1.5 text-xs text-ink-2 transition hover:border-line-strong hover:text-white">← Back to Gencaso</Link>
       </header>
 
