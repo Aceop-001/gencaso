@@ -18,6 +18,7 @@ export function GitHubIcon({ size = 16 }: { size?: number }) {
 }
 
 const LEGAL_LINKS = [
+  { href: "/docs", label: "Docs" },
   { href: "/legal#disclaimer", label: "Disclaimer" },
   { href: "/legal#privacy", label: "Privacy" },
   { href: "/legal#terms", label: "Terms of use" },
@@ -34,8 +35,8 @@ export function SiteFooter() {
           <p className="mt-2 text-xs leading-relaxed text-ink-3">Crypto tax estimates for Perp DEX, Prediction Market and NFT traders.</p>
         </div>
 
-        <nav aria-label="Legal" className="text-center">
-          <div className="text-[11px] uppercase tracking-[0.2em] text-ink-3">Legal</div>
+        <nav aria-label="Docs and legal" className="text-center">
+          <div className="text-[11px] uppercase tracking-[0.2em] text-ink-3">Resources</div>
           <ul className="mt-3 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
             {LEGAL_LINKS.map((l) => (
               <li key={l.href}><Link href={l.href} className="text-ink-2 transition hover:text-white">{l.label}</Link></li>

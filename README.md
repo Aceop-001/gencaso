@@ -40,7 +40,7 @@ API usage counters: `GET /api/usage`.
 
 ## Docs
 
-[Architecture](docs/ARCHITECTURE.md) · [Roadmap and verification log](docs/ROADMAP.md) · Legal page at `/legal`
+Full user docs at `/docs` on the site · [Architecture](docs/ARCHITECTURE.md) · [Roadmap and verification log](docs/ROADMAP.md) · Legal page at `/legal`
 
 ## Contributing
 

@@ -79,7 +79,10 @@ export function MoreMenu() {
           </ul>
           <div className="flex items-center justify-between border-t border-line px-5 py-3 text-xs text-ink-3">
             <span>Follow the build in the footer links</span>
-            <Link href="/legal" className="text-ink-2 hover:text-white" onClick={() => setOpen(false)}>Legal</Link>
+            <span className="flex gap-4">
+              <Link href="/docs" className="text-ink-2 hover:text-white" onClick={() => setOpen(false)}>Docs</Link>
+              <Link href="/legal" className="text-ink-2 hover:text-white" onClick={() => setOpen(false)}>Legal</Link>
+            </span>
           </div>
         </div>
       )}

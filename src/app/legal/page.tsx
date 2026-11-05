@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Logo } from "@/components/Logo";
-import { SiteFooter } from "@/components/Socials";
+import { Section, Subpage } from "@/components/Subpage";
 import { SOCIAL } from "@/lib/social";
 
 export const metadata: Metadata = {
@@ -19,49 +17,9 @@ const SECTIONS = [
   { id: "contact", title: "Changes & contact" },
 ];
 
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
-  return (
-    <section id={id} className="glass scroll-mt-24 rounded-3xl p-6 sm:p-8">
-      <h2 className="text-xl font-semibold tracking-[-0.02em] text-ink">{title}</h2>
-      <div className="mt-4 space-y-3 text-sm leading-relaxed text-ink-2 [&_li]:pl-1 [&_strong]:font-medium [&_strong]:text-ink [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">{children}</div>
-    </section>
-  );
-}
-
 export default function LegalPage() {
   return (
-    <main className="relative min-h-dvh overflow-x-clip">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[520px]" style={{ background: "radial-gradient(60% 80% at 20% 0%, rgba(61,123,255,.18), transparent 70%), radial-gradient(50% 70% at 90% 10%, rgba(139,108,255,.12), transparent 70%)" }} />
-
-      <header className="relative z-20 mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60" aria-label="Gencaso home">
-          <Logo size={32} />
-          <span className="block pr-[0.08em] font-serif text-[26px] italic leading-none tracking-[-0.01em] text-white">Gencaso</span>
-        </Link>
-        <Link href="/" className="rounded-full border border-line px-4 py-1.5 text-xs text-ink-2 transition hover:border-line-strong hover:text-white">← Back to Gencaso</Link>
-      </header>
-
-      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-16 pt-8 sm:px-6">
-        <div className="max-w-2xl">
-          <div className="text-[11px] uppercase tracking-[0.28em] text-cyan">Legal</div>
-          <h1 className="mt-3 text-[clamp(36px,6vw,64px)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">
-            The <span className="font-serif font-normal italic text-transparent bg-clip-text bg-[linear-gradient(100deg,#9ec3ff_0%,#38e1ff_45%,#b9a6ff_100%)]">fine print.</span>
-          </h1>
-          <p className="mt-4 text-[15px] leading-relaxed text-ink-2">Plain-language terms for using Gencaso. Last updated {UPDATED}.</p>
-        </div>
-
-        <div className="mt-10 grid gap-8 lg:grid-cols-[220px_1fr]">
-          <nav aria-label="On this page" className="lg:sticky lg:top-6 lg:self-start">
-            <ul className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
-              {SECTIONS.map((s) => (
-                <li key={s.id}>
-                  <a href={`#${s.id}`} className="block rounded-full border border-line px-3 py-1.5 text-xs text-ink-2 transition hover:border-line-strong hover:text-white lg:rounded-xl lg:border-transparent lg:px-3 lg:py-2 lg:text-sm lg:hover:bg-surface-2">{s.title}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="space-y-4">
+    <Subpage eyebrow="Legal" title="The" accent="fine print." intro={<p>Plain-language terms for using Gencaso. Last updated {UPDATED}.</p>} sections={SECTIONS}>
             <Section id="disclaimer" title="Disclaimer">
               <p><strong>Gencaso gives estimates, not advice.</strong> Nothing on this site is tax, legal, accounting or financial advice, and using it does not create any professional relationship.</p>
               <ul>
@@ -78,6 +36,7 @@ export default function LegalPage() {
                 <li><strong>What you give us:</strong> a public wallet address and, optionally, a country, tax year and &quot;other income&quot; figure.</li>
                 <li><strong>How it&apos;s used:</strong> the address is sent from our server to the public data sources listed below to fetch that wallet&apos;s activity. Tax is then calculated in your browser.</li>
                 <li><strong>What we keep:</strong> fetched wallet data is held temporarily in server memory so repeat lookups and country switches are fast. It is not sold or shared, and it is cleared when the server restarts.</li>
+                <li><strong>Server logs:</strong> like most websites, the server logs which addresses were analysed and when, to keep the service running and prevent abuse.</li>
                 <li><strong>No accounts or tracking:</strong> there is no sign-up, and we don&apos;t use advertising or analytics cookies.</li>
                 <li><strong>Your downloads:</strong> the spreadsheet and the tax card are created in your browser and saved to your device. Anything you share afterwards is up to you.</li>
                 <li>Wallet activity is public by nature. Anyone can look up any address, on Gencaso or on a block explorer.</li>
@@ -111,11 +70,6 @@ export default function LegalPage() {
                 <a href={SOCIAL.github.url} target="_blank" rel="noopener noreferrer" className="text-cyan hover:underline">{SOCIAL.github.handle}</a>.
               </p>
             </Section>
-          </div>
-        </div>
-      </div>
-
-      <SiteFooter />
-    </main>
+    </Subpage>
   );
 }
