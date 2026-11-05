@@ -144,7 +144,7 @@ export const PROTOCOLS: ProtocolEntry[] = [
       "Gains use the gross sale price: marketplace fees and royalties are not in OpenSea event data, so gains are slightly overstated.",
       "Crypto payments (ETH, WETH, BETH, POL, ...) are valued at the Coinbase daily close for the sale date.",
       "Minted or transferred-in NFTs have no purchase price in this data; their sales are flagged and not taxed.",
-      "Uses OPENSEA_API_KEY if set; otherwise (or once that key expires) a free OpenSea key that the server renews automatically every 7 days.",
+      "OpenSea requires an API key. Set OPENSEA_API_KEY for reliable access; otherwise the server tries a free 7-day key, which OpenSea's key service often refuses (HTTP 429), and then retries every 15 minutes.",
     ],
   },
   ...(

@@ -84,3 +84,54 @@ describe("OpenSea key on read-only hosting", () => {
     expect(calls.at(-1)).toBe("GET opensea minted-1");
   });
 });
+
+/** OpenSea where minting is rate-limited (as on shared hosting). keylessOk = reads work without a key. */
+function busyKeyService(opts: { keylessOk: boolean }) {
+  const calls: string[] = [];
+  const http: ProviderHttp = {
+    async getJson<T>(provider: string, url: string, headers?: Record<string, string>) {
+      const k = headers?.["x-api-key"];
+      calls.push(`GET ${provider} ${k ?? "(no key)"}`);
+      if (provider === "opensea" && k === undefined && !opts.keylessOk) throw new Error("opensea: HTTP 401");
+      if (provider === "opensea" && k === "expired") throw new Error("opensea: HTTP 401");
+      return { asset_events: [], next: null } as T;
+    },
+    async postJson<T>(provider: string): Promise<T> {
+      calls.push(`POST ${provider}`);
+      throw new Error("opensea: HTTP 429");
+    },
+  };
+  return { http, calls };
+}
+
+describe("OpenSea when the free-key service is busy", () => {
+  it("reads without a key instead of failing when a key can't be minted", async () => {
+    const { http, calls } = busyKeyService({ keylessOk: true });
+    const res = await run(http);
+    expect(calls).toEqual(["POST opensea", "GET opensea (no key)"]);
+    expect(res.report.status).toBe("empty");
+    expect(res.report.message).toMatch(/without an API key/);
+  });
+
+  it("waits before trying to mint again, so it doesn't hammer the key service", async () => {
+    const { http, calls } = busyKeyService({ keylessOk: true });
+    await run(http);
+    await run(http, NOW + 5 * 60_000);
+    expect(calls.filter((c) => c.startsWith("POST"))).toHaveLength(1);
+    await run(http, NOW + 16 * 60_000);
+    expect(calls.filter((c) => c.startsWith("POST"))).toHaveLength(2);
+  });
+
+  it("says exactly what to do when OpenSea refuses reads without a key (its current behaviour)", async () => {
+    const { http, calls } = busyKeyService({ keylessOk: false });
+    await expect(run(http)).rejects.toThrow(/Set OPENSEA_API_KEY.*15 minutes/);
+    expect(calls).toEqual(["POST opensea", "GET opensea (no key)"]);
+  });
+
+  it("gives the same clear message when an expired key can't be renewed", async () => {
+    process.env.OPENSEA_API_KEY = "expired";
+    const { http, calls } = busyKeyService({ keylessOk: false });
+    await expect(run(http)).rejects.toThrow(/Set OPENSEA_API_KEY/);
+    expect(calls).toEqual(["GET opensea expired", "POST opensea"]);
+  });
+});

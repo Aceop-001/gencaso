@@ -41,6 +41,7 @@ Updated 2026-11-02. ✅ done · 🟡 partial · ⬜ not started
 ## Technical risks
 1. **Tax interpretations** — perps and prediction markets are unsettled in every jurisdiction; modules state assumptions but need adviser review before any claim beyond "estimate".
 2. **Payload size** — very active wallets return multi-MB datasets to the browser; move to server-side summarisation + paginated events if needed.
-3. **Upstream availability** — Frankfurter returned a transient 522 during testing (retry added); Polymarket domains are blocked by some ISPs' DNS.
+3. **Upstream availability** — Frankfurter returned a transient 522 during testing (retry added); Polymarket domains are blocked by some ISPs' DNS. All providers now retry 429/5xx twice (Retry-After honoured, capped at 8 s).
+6. **OpenSea keys (2026-11-05)** — OpenSea now rejects keyless reads (401 "Missing an API Key") and its free-key service returns 429 to busy IPs, including shared hosts. Free keys are best-effort only (15-minute cooldown after a failed mint, clear error); production needs OPENSEA_API_KEY.
 4. **Year parameters** — FY2026-27 (IN), 2026 (DE) and 2026-27 (AU) parameters are marked unverified in-app.
 5. **Moving rules** — Korea (2027 start), Pakistan (proposed crypto CGT), Türkiye (bill status), Vietnam and Indonesia (scope for offshore/derivatives) are provisional and need re-checking as laws change.

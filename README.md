@@ -33,7 +33,7 @@ Put these in `.env.local` (never commit it):
 
 | Variable | Purpose |
 |---|---|
-| `OPENSEA_API_KEY` | Permanent OpenSea key. Without it, Gencaso gets a free 7-day key automatically and renews it. |
+| `OPENSEA_API_KEY` | **Recommended.** OpenSea requires a key. Without one, Gencaso tries a free 7-day key, but OpenSea's key service is often busy (HTTP 429), so NFT data can be unavailable. Get a key at opensea.io (Settings → Developer). |
 | `OPENSEA_AUTO_KEY=0` | Turn automatic OpenSea keys off |
 
 API usage counters: `GET /api/usage`.

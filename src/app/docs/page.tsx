@@ -224,7 +224,7 @@ npm test        # financial and tax unit tests`}</pre>
         <DocTable
           head={["Variable", "Purpose"]}
           rows={[
-            [<code key="a">OPENSEA_API_KEY</code>, "A permanent OpenSea key. Without it, Gencaso gets a free 7-day key automatically and renews it a day before it expires."],
+            [<code key="a">OPENSEA_API_KEY</code>, "Recommended. OpenSea requires an API key. Without one, Gencaso tries to get a free 7-day key, but OpenSea's key service often refuses (HTTP 429). NFT data is then unavailable, and Gencaso tries again every 15 minutes. Get a key in your OpenSea account under Settings → Developer."],
             [<code key="b">OPENSEA_AUTO_KEY=0</code>, "Turns automatic OpenSea keys off."],
           ]}
         />

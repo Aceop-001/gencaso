@@ -188,13 +188,16 @@ export function normalizeOsSales(sales: OsSale[], account: string, prices: Daily
   return { events, noBasis, unpriced };
 }
 
+const NO_KEY_ERROR =
+  "opensea: OpenSea needs an API key and a free one couldn't be created right now (its key service is busy). Set OPENSEA_API_KEY on the server; Gencaso tries again in 15 minutes.";
+
 export const OpenSeaDataProvider: DataProvider = {
   id: "opensea",
   protocol: "opensea",
   supports: (kind) => kind === "evm",
   async fetch(address, ctx): Promise<ProviderResult> {
     let key = await openSeaKey(ctx.http, ctx.now);
-    let requests = key?.minted ? 1 : 0;
+    let requests = key?.minted || key?.mintFailed ? 1 : 0;
     const limitations = [
       "Gains = gross sale price − purchase price; marketplace fees and royalties are not in OpenSea's event data, so gains are slightly overstated",
       "Crypto payments valued at the daily close (UTC) of the sale date: Coinbase, or Hyperliquid for HYPE",
@@ -212,21 +215,25 @@ export const OpenSeaDataProvider: DataProvider = {
     let next: string | null = null;
     let truncated = true;
     let renewed = false;
+    const headers = (): Record<string, string> => (key!.key ? { "x-api-key": key!.key, accept: "application/json" } : { accept: "application/json" });
     for (let i = 0; i < MAX_PAGES; i++) {
       const url: string = `${API}/${address}?event_type=sale&limit=${PAGE}${next ? `&next=${encodeURIComponent(next)}` : ""}`;
       let res: { asset_events: OsSale[]; next?: string | null };
       try {
-        res = await ctx.http.getJson("opensea", url, { "x-api-key": key.key, accept: "application/json" });
+        res = await ctx.http.getJson("opensea", url, headers());
       } catch (e) {
-        // Expired or revoked key: switch to (or renew) the automatic free key once, then retry this page
+        // OpenSea requires a key (since Nov 2026). Without one there is nothing to retry with.
+        if (isAuthError(e) && key.source === "keyless") throw new Error(NO_KEY_ERROR);
         if (!isAuthError(e) || renewed) throw e;
+        // Expired or revoked key: switch to (or renew) the automatic free key once, then retry this page
         rejectOpenSeaKey(key);
         const fresh = await openSeaKey(ctx.http, ctx.now);
         if (!fresh) throw e;
+        if (fresh.source === "keyless") throw new Error(NO_KEY_ERROR);
         key = fresh;
         renewed = true;
         requests += 1 + (fresh.minted ? 1 : 0);
-        res = await ctx.http.getJson("opensea", url, { "x-api-key": key.key, accept: "application/json" });
+        res = await ctx.http.getJson("opensea", url, headers());
       }
       requests++;
       sales.push(...(res.asset_events ?? []));
@@ -279,6 +286,7 @@ export const OpenSeaDataProvider: DataProvider = {
         message: [
           events.length ? "" : "No NFT sales for this address on OpenSea.",
           key.source === "auto" ? `Using a free OpenSea key, renewed automatically (current one expires ${new Date(key.expiresAt!).toISOString().slice(0, 10)}).` : "",
+          key.source === "keyless" ? "Read without an API key (a free key couldn't be created right now). Set OPENSEA_API_KEY for reliable access." : "",
         ].filter(Boolean).join(" ") || undefined,
         limitations,
       },
