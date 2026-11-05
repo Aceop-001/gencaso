@@ -66,12 +66,13 @@ describe("OpenSea key", () => {
     expect(calls.at(-1)).toBe("GET opensea minted-2");
   });
 
-  it("stays disconnected when automatic keys are turned off and no key is set", async () => {
+  it("uses the on-chain backup when automatic keys are off and no key is set", async () => {
     process.env.OPENSEA_AUTO_KEY = "0";
     const { http, calls } = fakeOpenSea(new Set());
     const res = await run(http);
-    expect(calls).toEqual([]);
-    expect(res.report.status).toBe("unsupported");
+    expect(calls.some((c) => c.startsWith("GET opensea"))).toBe(false);
+    expect(calls.some((c) => c.startsWith("GET blockscout"))).toBe(true);
+    expect(res.report.message).toMatch(/Backup/);
   });
 });
 
@@ -86,7 +87,7 @@ describe("OpenSea key on read-only hosting", () => {
 });
 
 /** OpenSea where minting is rate-limited (as on shared hosting). keylessOk = reads work without a key. */
-function busyKeyService(opts: { keylessOk: boolean }) {
+function busyKeyService(opts: { keylessOk: boolean; blockscoutDown?: boolean }) {
   const calls: string[] = [];
   const http: ProviderHttp = {
     async getJson<T>(provider: string, url: string, headers?: Record<string, string>) {
@@ -94,6 +95,7 @@ function busyKeyService(opts: { keylessOk: boolean }) {
       calls.push(`GET ${provider} ${k ?? "(no key)"}`);
       if (provider === "opensea" && k === undefined && !opts.keylessOk) throw new Error("opensea: HTTP 401");
       if (provider === "opensea" && k === "expired") throw new Error("opensea: HTTP 401");
+      if (provider === "blockscout" && opts.blockscoutDown) throw new Error("blockscout: HTTP 503");
       return { asset_events: [], next: null } as T;
     },
     async postJson<T>(provider: string): Promise<T> {
@@ -110,7 +112,7 @@ describe("OpenSea when the free-key service is busy", () => {
     const res = await run(http);
     expect(calls).toEqual(["POST opensea", "GET opensea (no key)"]);
     expect(res.report.status).toBe("empty");
-    expect(res.report.message).toMatch(/without an API key/);
+    expect(res.report.message).not.toMatch(/Backup/);
   });
 
   it("waits before trying to mint again, so it doesn't hammer the key service", async () => {
@@ -122,16 +124,25 @@ describe("OpenSea when the free-key service is busy", () => {
     expect(calls.filter((c) => c.startsWith("POST"))).toHaveLength(2);
   });
 
-  it("says exactly what to do when OpenSea refuses reads without a key (its current behaviour)", async () => {
+  it("switches to the on-chain backup when OpenSea refuses reads without a key (its current behaviour)", async () => {
     const { http, calls } = busyKeyService({ keylessOk: false });
-    await expect(run(http)).rejects.toThrow(/Set OPENSEA_API_KEY.*15 minutes/);
-    expect(calls).toEqual(["POST opensea", "GET opensea (no key)"]);
+    const res = await run(http);
+    expect(calls.slice(0, 2)).toEqual(["POST opensea", "GET opensea (no key)"]);
+    expect(calls.some((c) => c.startsWith("GET blockscout"))).toBe(true);
+    expect(res.warnings.join(" ")).toMatch(/OpenSea unavailable.*Set OPENSEA_API_KEY.*rebuilt from on-chain data/);
+    expect(res.report.message).toMatch(/Backup/);
   });
 
-  it("gives the same clear message when an expired key can't be renewed", async () => {
+  it("also falls back when an expired key can't be renewed", async () => {
     process.env.OPENSEA_API_KEY = "expired";
     const { http, calls } = busyKeyService({ keylessOk: false });
-    await expect(run(http)).rejects.toThrow(/Set OPENSEA_API_KEY/);
-    expect(calls).toEqual(["GET opensea expired", "POST opensea"]);
+    const res = await run(http);
+    expect(calls.slice(0, 2)).toEqual(["GET opensea expired", "POST opensea"]);
+    expect(res.report.message).toMatch(/Backup/);
+  });
+
+  it("reports both failures clearly if the on-chain backup is down too", async () => {
+    const { http } = busyKeyService({ keylessOk: false, blockscoutDown: true });
+    await expect(run(http)).rejects.toThrow(/Set OPENSEA_API_KEY.*on-chain backup \(Blockscout\) is unavailable too/);
   });
 });

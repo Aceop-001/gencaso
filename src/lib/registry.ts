@@ -145,6 +145,7 @@ export const PROTOCOLS: ProtocolEntry[] = [
       "Crypto payments (ETH, WETH, BETH, POL, ...) are valued at the Coinbase daily close for the sale date.",
       "Minted or transferred-in NFTs have no purchase price in this data; their sales are flagged and not taxed.",
       "OpenSea requires an API key. Set OPENSEA_API_KEY for reliable access; otherwise the server tries a free 7-day key, which OpenSea's key service often refuses (HTTP 429), and then retries every 15 minutes.",
+      "If OpenSea can't be read, NFT trades are rebuilt from on-chain data (Blockscout, no key) on Ethereum, Optimism, Base, Arbitrum and Polygon, priced at the wallet's net payment (fees already deducted). Checked against OpenSea on 2026-11-05: 14 of 14 trades matched. Trades on other chains (e.g. HyperEVM) still need OpenSea.",
     ],
   },
   ...(
@@ -183,4 +184,38 @@ export const PROTOCOLS: ProtocolEntry[] = [
   ),
 ];
 
-export const protocolById = (id: ProtocolId) => PROTOCOLS.find((p) => p.id === id);
+/**
+ * Data sources supply another protocol's data behind the scenes rather than being a tradable
+ * protocol of their own, so they are named in the results "Data sources" list but kept out of
+ * PROTOCOLS — which drives the protocol list on the homepage.
+ */
+const DATA_SOURCES: ProtocolEntry[] = [
+  {
+    // "surf" is a source id, not a protocol id: the engine's ProtocolId union is not ours to extend.
+    id: "surf" as ProtocolId,
+    name: "Surf",
+    category: "perp",
+    chains: ["Hyperliquid L1", "Polygon"],
+    website: "https://asksurf.ai",
+    docs: "https://docs.asksurf.ai",
+    endpoints: [
+      "GET https://api.asksurf.ai/gateway/v1/hyperliquid/fills?address=<wallet>&order=desc&from=<t>&to=<t>&limit=100",
+      "GET https://api.asksurf.ai/gateway/v1/prediction-market/polymarket/trades?address=<wallet>&type=all&limit=500&offset=<n>",
+      "GET https://api.asksurf.ai/gateway/v1/prediction-market/polymarket/positions?address=<wallet>&limit=100&offset=<n>",
+    ],
+    accountId: "EVM wallet address (SURF_API_KEY required, server-side only)",
+    addressKinds: ["evm"],
+    history: "Warehouse-backed Hyperliquid fill history beyond Hyperliquid's own 10,000-fill API window, plus Polymarket trade and position history.",
+    txTypes: ["Older Hyperliquid fills (backfill)", "Polymarket trades, redemptions and positions (stand-in when the direct call fails)"],
+    status: "live",
+    verifiedOn: "2026-11-04",
+    limitations: [
+      "A backfill only: direct provider data always wins and is never replaced.",
+      "Hyperliquid fills carry no liquidation flag, so liquidations supplied by Surf are classified by direction.",
+      "Funding cannot be cross-checked: Surf's warehouse rows report funding_status \"unavailable\".",
+      "No NFT data is available from the Surf Data API.",
+    ],
+  },
+];
+
+export const protocolById = (id: ProtocolId) => PROTOCOLS.find((p) => p.id === id) ?? DATA_SOURCES.find((p) => p.id === id);

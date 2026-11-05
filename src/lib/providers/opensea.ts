@@ -1,6 +1,7 @@
 import { round } from "../engine/positions";
 import type { FinancialEvent } from "../engine/schema";
-import { isAuthError, openSeaKey, rejectOpenSeaKey } from "../server/openseaKey";
+import { isAuthError, openSeaKey, rejectOpenSeaKey, type OpenSeaKey } from "../server/openseaKey";
+import { fetchOnchainNftSales, ONCHAIN_CHAINS } from "./nftOnchain";
 import type { DataProvider, ProviderHttp, ProviderResult } from "./types";
 
 /**
@@ -106,7 +107,13 @@ export function paymentUsd(s: OsSale, prices: DailyCloses): number | null {
 }
 
 /** Rebuild buys and sells (with specific-identification cost basis) from a wallet's sale events. */
-export function normalizeOsSales(sales: OsSale[], account: string, prices: DailyCloses): { events: FinancialEvent[]; noBasis: { count: number; proceedsUsd: number }; unpriced: number } {
+/** "a, b and c" — chain lists read the same way wherever they are shown. */
+const chainList = (chains: string[]) => (chains.length > 1 ? `${chains.slice(0, -1).join(", ")} and ${chains[chains.length - 1]}` : (chains[0] ?? ""));
+
+/** Where the sale records came from: OpenSea's API (gross prices) or the on-chain backup (net cash flows). */
+export type SaleOrigin = "opensea" | "onchain";
+
+export function normalizeOsSales(sales: OsSale[], account: string, prices: DailyCloses, origin: SaleOrigin = "opensea"): { events: FinancialEvent[]; noBasis: { count: number; proceedsUsd: number }; unpriced: number } {
   const me = account.toLowerCase();
   const pools = new Map<string, { qty: number; cost: number; costKnown: boolean; since: number }>();
   const events: FinancialEvent[] = [];
@@ -140,7 +147,7 @@ export function normalizeOsSales(sales: OsSale[], account: string, prices: Daily
       fundingUsd: 0,
       feeUsd: 0,
       fiat: { currency: "USD" as const, source: STABLE.has(sym.toUpperCase()) ? `${sym} assumed = 1 USD` : HL_PRICED.has(productFor(sym) ?? "") ? `${sym} at Hyperliquid daily close (USDC)` : `${sym} at Coinbase ${productFor(sym) ?? "?"}-USD daily close` },
-      source: "OpenSea API v2 · events/accounts (sale)",
+      source: origin === "onchain" ? `On-chain (Blockscout · ${s.chain}), OpenSea backup` : "OpenSea API v2 · events/accounts (sale)",
       txHash: s.transaction,
     };
 
@@ -179,8 +186,8 @@ export function normalizeOsSales(sales: OsSale[], account: string, prices: Daily
       verification: basisKnown && usd !== null ? "estimated" : "missing",
       confidence: 0.9,
       notes: [
-        `Sold for ${paid} (gross — marketplace fee and royalty not included)`,
-        !basisKnown ? "no purchase in OpenSea history (minted, transferred in, or bought earlier): gain not counted" : "",
+        origin === "onchain" ? `Received ${paid} (net of marketplace fee and royalty, from on-chain transfers)` : `Sold for ${paid} (gross — marketplace fee and royalty not included)`,
+        !basisKnown ? `no purchase in ${origin === "onchain" ? "this on-chain" : "OpenSea"} history (minted free, transferred in, or bought earlier): gain not counted` : "",
         usd === null ? "no USD price for this token/date" : "",
       ].filter(Boolean).join(" · "),
     });
@@ -191,57 +198,96 @@ export function normalizeOsSales(sales: OsSale[], account: string, prices: Daily
 const NO_KEY_ERROR =
   "opensea: OpenSea needs an API key and a free one couldn't be created right now (its key service is busy). Set OPENSEA_API_KEY on the server; Gencaso tries again in 15 minutes.";
 
+/** All sale events from OpenSea's API. Throws when OpenSea can't be read (no key, refused, outage). */
+async function fetchOpenSeaSales(address: string, ctx: { http: ProviderHttp; now: number }, first: OpenSeaKey): Promise<{ sales: OsSale[]; truncated: boolean; requests: number; key: OpenSeaKey }> {
+  let key = first;
+  let requests = 0;
+  const sales: OsSale[] = [];
+  let next: string | null = null;
+  let truncated = true;
+  let renewed = false;
+  const headers = (): Record<string, string> => (key.key ? { "x-api-key": key.key, accept: "application/json" } : { accept: "application/json" });
+  for (let i = 0; i < MAX_PAGES; i++) {
+    const url: string = `${API}/${address}?event_type=sale&limit=${PAGE}${next ? `&next=${encodeURIComponent(next)}` : ""}`;
+    let res: { asset_events: OsSale[]; next?: string | null };
+    try {
+      res = await ctx.http.getJson("opensea", url, headers());
+    } catch (e) {
+      // OpenSea requires a key (since Nov 2026). Without one there is nothing to retry with.
+      if (isAuthError(e) && key.source === "keyless") throw new Error(NO_KEY_ERROR);
+      if (!isAuthError(e) || renewed) throw e;
+      // Expired or revoked key: switch to (or renew) the automatic free key once, then retry this page
+      rejectOpenSeaKey(key);
+      const fresh = await openSeaKey(ctx.http, ctx.now);
+      if (!fresh) throw e;
+      if (fresh.source === "keyless") throw new Error(NO_KEY_ERROR);
+      key = fresh;
+      renewed = true;
+      requests += 1 + (fresh.minted ? 1 : 0);
+      res = await ctx.http.getJson("opensea", url, headers());
+    }
+    requests++;
+    sales.push(...(res.asset_events ?? []));
+    next = res.next ?? null;
+    if (!next || !res.asset_events?.length) {
+      truncated = false;
+      break;
+    }
+  }
+  return { sales, truncated, requests, key };
+}
+
+const LIMITS_OPENSEA = [
+  "Gains = gross sale price − purchase price; marketplace fees and royalties are not in OpenSea's event data, so gains are slightly overstated",
+  "Crypto payments valued at the daily close (UTC) of the sale date: Coinbase, or Hyperliquid for HYPE",
+  "NFTs minted or transferred in have no purchase price here; their sales are flagged, not taxed",
+];
+const LIMITS_ONCHAIN = [
+  "Backup source: NFT trades rebuilt from on-chain transfers (Blockscout) because OpenSea's API was unavailable",
+  `Covers ${chainList(ONCHAIN_CHAINS.map((c) => c.chain))} only; NFT trades on other chains are missing until OpenSea is back`,
+  "Prices are the wallet's net payment in each transaction, so marketplace fees and royalties are already deducted; gas is not included",
+  "Several NFTs in one transaction share its payment by units; mixed swaps and unpaid transfers are skipped, not guessed",
+];
+
 export const OpenSeaDataProvider: DataProvider = {
   id: "opensea",
   protocol: "opensea",
   supports: (kind) => kind === "evm",
   async fetch(address, ctx): Promise<ProviderResult> {
-    let key = await openSeaKey(ctx.http, ctx.now);
-    let requests = key?.minted || key?.mintFailed ? 1 : 0;
-    const limitations = [
-      "Gains = gross sale price − purchase price; marketplace fees and royalties are not in OpenSea's event data, so gains are slightly overstated",
-      "Crypto payments valued at the daily close (UTC) of the sale date: Coinbase, or Hyperliquid for HYPE",
-      "NFTs minted or transferred in have no purchase price here; their sales are flagged, not taxed",
-    ];
-    if (!key)
-      return {
-        events: [],
-        openPositions: [],
-        warnings: [],
-        report: { provider: "OpenSeaDataProvider", protocol: "opensea", status: "unsupported", eventCount: 0, requests: 0, fromCache: false, message: "OpenSea is not connected: set OPENSEA_API_KEY on the server (automatic free keys are turned off).", limitations },
-      };
+    const first = await openSeaKey(ctx.http, ctx.now);
+    let requests = first?.minted || first?.mintFailed ? 1 : 0;
+    const warnings: string[] = [];
+    let sales: OsSale[] = [];
+    let truncated = false;
+    let key: OpenSeaKey | null = first;
+    let origin: SaleOrigin = "opensea";
+    let openSeaError: string | undefined;
 
-    const sales: OsSale[] = [];
-    let next: string | null = null;
-    let truncated = true;
-    let renewed = false;
-    const headers = (): Record<string, string> => (key!.key ? { "x-api-key": key!.key, accept: "application/json" } : { accept: "application/json" });
-    for (let i = 0; i < MAX_PAGES; i++) {
-      const url: string = `${API}/${address}?event_type=sale&limit=${PAGE}${next ? `&next=${encodeURIComponent(next)}` : ""}`;
-      let res: { asset_events: OsSale[]; next?: string | null };
+    // 1. OpenSea's API
+    if (first) {
       try {
-        res = await ctx.http.getJson("opensea", url, headers());
+        const r = await fetchOpenSeaSales(address, ctx, first);
+        sales = r.sales;
+        truncated = r.truncated;
+        key = r.key;
+        requests += r.requests;
       } catch (e) {
-        // OpenSea requires a key (since Nov 2026). Without one there is nothing to retry with.
-        if (isAuthError(e) && key.source === "keyless") throw new Error(NO_KEY_ERROR);
-        if (!isAuthError(e) || renewed) throw e;
-        // Expired or revoked key: switch to (or renew) the automatic free key once, then retry this page
-        rejectOpenSeaKey(key);
-        const fresh = await openSeaKey(ctx.http, ctx.now);
-        if (!fresh) throw e;
-        if (fresh.source === "keyless") throw new Error(NO_KEY_ERROR);
-        key = fresh;
-        renewed = true;
-        requests += 1 + (fresh.minted ? 1 : 0);
-        res = await ctx.http.getJson("opensea", url, headers());
+        openSeaError = (e as Error).message.replace(/^opensea: /, "");
       }
-      requests++;
-      sales.push(...(res.asset_events ?? []));
-      next = res.next ?? null;
-      if (!next || !res.asset_events?.length) {
-        truncated = false;
-        break;
-      }
+    } else openSeaError = "no OPENSEA_API_KEY is set and automatic free keys are off.";
+
+    // 2. Backup: rebuild the trades from on-chain data
+    if (openSeaError !== undefined) {
+      const oc = await fetchOnchainNftSales(ctx.http, address);
+      requests += oc.requests;
+      if (!oc.chainsChecked.length) throw new Error(`opensea: ${openSeaError} The on-chain backup (Blockscout) is unavailable too.`);
+      sales = oc.sales;
+      origin = "onchain";
+      warnings.push(`OpenSea unavailable: ${openSeaError} NFT trades were rebuilt from on-chain data on ${chainList(ONCHAIN_CHAINS.map((c) => c.chain).filter((c) => oc.chainsChecked.includes(c)))} instead; trades on other chains are missing.`);
+      if (oc.failedChains.length) warnings.push(`On-chain NFT backup could not read ${oc.failedChains.join(", ")}.`);
+      if (oc.skipped.mixed) warnings.push(`On-chain NFT backup: ${oc.skipped.mixed} transaction(s) mixed several NFTs or currencies and were skipped rather than guessed.`);
+      if (oc.skipped.failed) warnings.push(`On-chain NFT backup: ${oc.skipped.failed} transaction(s) could not be read (the explorer timed out on them) and were skipped.`);
+      if (oc.skipped.capped) warnings.push(`On-chain NFT backup: history was capped; ${oc.skipped.capped} older transaction(s) were not read.`);
     }
 
     // Price every payment token on the days it was used
@@ -255,7 +301,6 @@ export const OpenSeaDataProvider: DataProvider = {
     }
     if (need.has("POL")) need.set("MATIC", need.get("POL")!); // POL replaced MATIC in Sept 2024
     const prices: DailyCloses = {};
-    const warnings: string[] = [];
     for (const [product, days] of need) {
       try {
         const r = HL_PRICED.has(product) ? await fetchHyperliquidCloses(ctx.http, product, days) : await fetchDailyCloses(ctx.http, product, days);
@@ -266,10 +311,10 @@ export const OpenSeaDataProvider: DataProvider = {
       }
     }
 
-    const { events, noBasis, unpriced } = normalizeOsSales(sales, address, prices);
+    const { events, noBasis, unpriced } = normalizeOsSales(sales, address, prices, origin);
     if (truncated) warnings.push(`OpenSea history stopped at ${(MAX_PAGES * PAGE).toLocaleString()} sales — older trades may be missing.`);
     if (noBasis.count)
-      warnings.push(`OpenSea: ${noBasis.count} NFT sale(s) (≈$${noBasis.proceedsUsd.toFixed(2)} proceeds) have no purchase in this history (minted, transferred in, or bought earlier). Their gain is not counted — add the cost manually.`);
+      warnings.push(`${origin === "onchain" ? "NFTs" : "OpenSea"}: ${noBasis.count} NFT sale(s) (≈$${noBasis.proceedsUsd.toFixed(2)} proceeds) have no purchase in this history (minted, transferred in, or bought earlier). Their gain is not counted — add the cost manually.`);
     if (unpriced) warnings.push(`OpenSea: ${unpriced} sale(s) were paid in a token with no USD price for that date; they are excluded from P&L.`);
 
     return {
@@ -284,11 +329,11 @@ export const OpenSeaDataProvider: DataProvider = {
         requests,
         fromCache: false,
         message: [
-          events.length ? "" : "No NFT sales for this address on OpenSea.",
-          key.source === "auto" ? `Using a free OpenSea key, renewed automatically (current one expires ${new Date(key.expiresAt!).toISOString().slice(0, 10)}).` : "",
-          key.source === "keyless" ? "Read without an API key (a free key couldn't be created right now). Set OPENSEA_API_KEY for reliable access." : "",
+          origin === "onchain" ? `Backup: OpenSea was unavailable, so NFT trades were rebuilt from on-chain data (${ONCHAIN_CHAINS.map((c) => c.chain).join(", ")}).` : "",
+          events.length ? "" : origin === "onchain" ? "No paid NFT trades found on-chain for this address." : "No NFT sales for this address on OpenSea.",
+          origin === "opensea" && key?.source === "auto" ? `Using a free OpenSea key, renewed automatically (current one expires ${new Date(key.expiresAt!).toISOString().slice(0, 10)}).` : "",
         ].filter(Boolean).join(" ") || undefined,
-        limitations,
+        limitations: origin === "onchain" ? LIMITS_ONCHAIN : LIMITS_OPENSEA,
       },
     };
   },

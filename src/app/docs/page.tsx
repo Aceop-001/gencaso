@@ -224,7 +224,7 @@ npm test        # financial and tax unit tests`}</pre>
         <DocTable
           head={["Variable", "Purpose"]}
           rows={[
-            [<code key="a">OPENSEA_API_KEY</code>, "Recommended. OpenSea requires an API key. Without one, Gencaso tries to get a free 7-day key, but OpenSea's key service often refuses (HTTP 429). NFT data is then unavailable, and Gencaso tries again every 15 minutes. Get a key in your OpenSea account under Settings → Developer."],
+            [<code key="a">OPENSEA_API_KEY</code>, "Recommended. OpenSea requires an API key. Without one, Gencaso tries to get a free 7-day key, but OpenSea's key service often refuses (HTTP 429). Gencaso then rebuilds NFT trades from on-chain data on Ethereum, Optimism, Base, Arbitrum and Polygon (free, no key) and tries OpenSea again every 15 minutes. Get a key in your OpenSea account under Settings → Developer to cover every chain."],
             [<code key="b">OPENSEA_AUTO_KEY=0</code>, "Turns automatic OpenSea keys off."],
           ]}
         />

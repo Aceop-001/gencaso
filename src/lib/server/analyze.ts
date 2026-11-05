@@ -7,6 +7,7 @@ import { HyperliquidDataProvider } from "../providers/hyperliquid";
 import { MockDataProvider } from "../providers/mock";
 import { OpenSeaDataProvider } from "../providers/opensea";
 import { PolymarketDataProvider } from "../providers/polymarket";
+import { SurfDataProvider, surfConfigured } from "../providers/surf";
 import type { DataProvider, ProviderResult } from "../providers/types";
 import { validateAddress } from "../validation";
 import { meteredHttp } from "./http";
@@ -30,6 +31,9 @@ interface CacheEntry {
   at: number;
   perProvider: Map<string, { events: FinancialEvent[]; open: OpenPosition[]; warnings: string[]; report: ProviderReport }>;
   fx?: { from: number; to: number; table: FxTable };
+  /** Surf bookkeeping: the Hyperliquid gap already walked (earliest direct fill it was walked for)
+   *  and whether the Polymarket stand-in already ran, so neither is repeated for this address. */
+  surf?: { hyperliquid?: number; polymarket?: boolean };
 }
 const g = globalThis as unknown as { __gencasoCache?: Map<string, CacheEntry> };
 const cache = (g.__gencasoCache ??= new Map());
@@ -79,6 +83,79 @@ export async function analyzeWallet(input: string, opts: { refresh?: boolean } =
       });
     }),
   );
+
+  // Surf (asksurf.ai) runs after the direct providers because it works from their results: it adds
+  // Hyperliquid fills older than the direct API's 10,000-fill window, and stands in for Polymarket
+  // only when that call failed. It never replaces direct data, and never fails the analysis.
+  const surfPrev = entry.perProvider.get("surf");
+  if (surfConfigured()) {
+    const hl = entry.perProvider.get("hyperliquid");
+    const pm = entry.perProvider.get("polymarket");
+    const hlFills = (hl?.events ?? []).filter((e) => e.id.startsWith("hl-fill-"));
+    const earliestFillMs = hlFills.length ? Math.min(...hlFills.map((e) => e.timestamp)) : 0;
+    const truncated = (hl?.warnings ?? []).some((w) => w.includes("10,000-fill limit"));
+    const pmFailed = pm?.report.status === "error";
+    const wantHyperliquid = truncated && earliestFillMs > 0 && entry.surf?.hyperliquid !== earliestFillMs;
+    const wantPolymarket = pmFailed && !(pm?.events.length) && !entry.surf?.polymarket;
+
+    // A reachable direct Polymarket call replaces Surf's stand-in events (direct data always wins)
+    if (surfPrev && !pmFailed && pm?.events.length) {
+      const kept = surfPrev.events.filter((e) => e.protocol !== "polymarket");
+      if (kept.length !== surfPrev.events.length) {
+        surfPrev.events = kept;
+        surfPrev.report = { ...surfPrev.report, eventCount: kept.length };
+      }
+      entry.surf = { ...entry.surf, polymarket: false };
+    }
+
+    // Nothing left to fetch: a fresh cache window, or both gaps already closed for this address
+    if (surfPrev && (fresh || !(wantHyperliquid || wantPolymarket))) {
+      surfPrev.report = { ...surfPrev.report, fromCache: true, requests: 0 };
+    } else if (wantHyperliquid || wantPolymarket) {
+      try {
+        const res = await SurfDataProvider.fetch(
+          address,
+          { http: meteredHttp, now }, // Surf always fetches the missing range, so there is no `since`
+          {
+            hyperliquid: { earliestFillMs, truncated, events: hlFills },
+            polymarket: { failed: pmFailed, events: pm?.events ?? [] },
+            knownIds: new Set([...entry.perProvider.values()].flatMap((v) => v.events.map((e) => e.id))),
+          },
+        );
+        const events = dedupe([...(surfPrev?.events ?? []), ...res.events]).events;
+        entry.perProvider.set("surf", {
+          events,
+          open: [...(surfPrev?.open ?? []), ...res.openPositions],
+          warnings: [...new Set([...(surfPrev?.warnings ?? []), ...res.warnings])],
+          report: { ...res.report, eventCount: events.length },
+        });
+        if (wantHyperliquid && !res.skipped) entry.surf = { ...entry.surf, hyperliquid: earliestFillMs };
+        if (res.polymarketBackup) entry.surf = { ...entry.surf, polymarket: true };
+
+        // The direct provider's "trades before … are missing" warning now says what Surf recovered.
+        if (res.hyperliquid && hl && res.hyperliquid.added > 0) {
+          const from = new Date(res.hyperliquid.fromMs).toISOString().slice(0, 10);
+          const added = res.hyperliquid.added.toLocaleString();
+          const replacement = res.hyperliquid.complete
+            ? `Hyperliquid's API only returns the 10,000 most recent fills. Surf added ${added} older fills, so this wallet's fill history is now complete back to ${from} (funding and transfers are complete).`
+            : `Hyperliquid's API only returns the 10,000 most recent fills. Surf added ${added} older fills, so history now runs back to ${from}; trades before ${from} are still missing, so results for earlier tax years are incomplete (funding and transfers are complete).`;
+          hl.warnings = hl.warnings.map((w) => (/trades before .+ are missing/.test(w) ? replacement : w));
+        }
+      } catch (e) {
+        const message = (e as Error).message;
+        entry.perProvider.set("surf", {
+          events: surfPrev?.events ?? [],
+          open: surfPrev?.open ?? [],
+          warnings: [`surf: backfill failed (${message})${surfPrev ? " — showing previously cached Surf data" : ""}.`],
+          report: { provider: "surf", protocol: "hyperliquid", status: "error", eventCount: surfPrev?.events.length ?? 0, requests: 0, fromCache: !!surfPrev, message, limitations: [] },
+        });
+      }
+    }
+  } else if (surfPrev) {
+    // The key was removed between analyses: keep the cached Surf events, make no requests.
+    surfPrev.report = { ...surfPrev.report, fromCache: true, requests: 0 };
+  }
+
   if (!fresh) entry.at = now;
 
   const all = dedupe([...entry.perProvider.values()].flatMap((v) => v.events)).events;

@@ -17,8 +17,9 @@ const g = globalThis as unknown as { __gencasoUsage?: Map<string, UsageRecord>; 
 const usage = (g.__gencasoUsage ??= new Map());
 const lastHit = (g.__gencasoLastHit ??= new Map());
 
-const MIN_INTERVAL_MS: Record<string, number> = { hyperliquid: 60, polymarket: 120, bulk: 100, hertzflow: 100, opensea: 250, coinbase: 120, fx: 0, "fx-cdn": 0 };
-const TIMEOUT_MS: Record<string, number> = { fx: 8_000, "fx-cdn": 8_000 };
+// surf: Surf's Data API allows 100 requests/min per key, so backfill requests are spaced 600 ms apart.
+const MIN_INTERVAL_MS: Record<string, number> = { hyperliquid: 60, polymarket: 120, bulk: 100, hertzflow: 100, opensea: 250, blockscout: 150, surf: 600, coinbase: 120, fx: 0, "fx-cdn": 0 };
+const TIMEOUT_MS: Record<string, number> = { fx: 8_000, "fx-cdn": 8_000, blockscout: 8_000 };
 
 export function getUsage(): UsageRecord[] {
   return [...usage.values()];
