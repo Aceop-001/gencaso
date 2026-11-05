@@ -107,7 +107,7 @@ export default function LegalPage() {
               <p>We may update this page as Gencaso grows. The date at the top shows the latest version, and continued use means you accept it.</p>
               <p>
                 Questions or corrections? Reach the builder on X at{" "}
-                <a href={SOCIAL.x.url} target="_blank" rel="noopener noreferrer" className="text-cyan hover:underline">{SOCIAL.x.handle}</a> or on GitHub at{" "}
+                <a href={SOCIAL.x.url} target="_blank" rel="noopener noreferrer" className="text-cyan hover:underline">{SOCIAL.x.handle}</a> or open an issue on GitHub at{" "}
                 <a href={SOCIAL.github.url} target="_blank" rel="noopener noreferrer" className="text-cyan hover:underline">{SOCIAL.github.handle}</a>.
               </p>
             </Section>
