@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gencaso
 
-## Getting Started
+**Get your crypto tax ready.** Paste a public wallet, pick a country, and get an auditable tax estimate in USD for **Perpetual DEX, Prediction Market and NFT** activity. Switch between 22 countries instantly: the same data is re-taxed in your browser, with no new requests.
 
-First, run the development server:
+> Estimates only — not tax, legal or financial advice. Read-only: Gencaso never asks for private keys or seed phrases.
+
+## Features
+
+- **Live data:** Hyperliquid, Polymarket, Bulk Trade, HertzFlow and OpenSea (public APIs, read-only)
+- **22 countries**, each a separate, versioned tax module with cited sources and a list of what remains uncertain
+- **Every number traceable:** normalised events with explorer links, cost basis and fees
+- **Accountant report:** one `.xlsx` (Summary, Tax calculation, Transactions, By asset) that opens in Google Sheets
+- **Shareable tax card:** a PNG of the estimate, made in the browser
+- No accounts, no tracking, no AI in the maths: profits, losses and tax are computed in code and covered by unit tests
+
+## Run locally
+
+Requires Node.js 20+.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm test           # financial and tax unit tests
+npm run typecheck
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Click **Try the demo wallet** for a clearly labelled synthetic dataset.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Optional environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Put these in `.env.local` (never commit it):
 
-## Learn More
+| Variable | Purpose |
+|---|---|
+| `OPENSEA_API_KEY` | Permanent OpenSea key. Without it, Gencaso gets a free 7-day key automatically and renews it. |
+| `OPENSEA_AUTO_KEY=0` | Turn automatic OpenSea keys off |
 
-To learn more about Next.js, take a look at the following resources:
+API usage counters: `GET /api/usage`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Docs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+[Architecture](docs/ARCHITECTURE.md) · [Roadmap and verification log](docs/ROADMAP.md) · Legal page at `/legal`
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Issues and pull requests are welcome, especially tax-rule corrections with a link to an official source.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+[MIT](LICENSE) © 2026 Aceop
+
+Protocol names and logos in `public/protocols/` belong to their owners and are used only to show supported integrations; they are not covered by the MIT license. The caustic background is adapted from OpenDesign's Caustic Pool plugin (MIT).
+
+Follow the build: [X @aceop_xyz](https://x.com/aceop_xyz) · [GitHub](https://github.com/Aceop-001)

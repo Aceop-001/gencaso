@@ -1,0 +1,46 @@
+# GENCASO roadmap & status
+
+Updated 2026-11-02. ✅ done · 🟡 partial · ⬜ not started
+
+| Phase | Status | What exists |
+|---|---|---|
+| 1 Foundation & UI | ✅ | Next.js app, design tokens, Caustic Pool hero (WebGL2 + fallback), animated wallet bar, SVG-flag country selector, scan sequence, results dashboard, demo wallet with labelled mock data |
+| 2 Financial engine | ✅ | `FinancialEvent` schema, PositionBook (partial closes, flips, settlement), summaries, dedupe, unit tests |
+| 3 Data integrations | ✅ | Hyperliquid + Polymarket providers, tested against live public wallets; incremental sync (HL); pagination; 10k-fill cap detection |
+| 4 Historical pricing | 🟡 | ECB daily FX per event, cached per analysis, missing-rate detection. Not yet: non-USDC asset pricing, depeg adjustment, second price source |
+| 5 Country tax engine | 🟡 | 22 modules (IN, US, GB, DE, AU, CN, FR, ID, JP, MY, NG, PK, PH, RU, SG, ZA, KR, LK, TR, AE, UA, VN), each v1.0.0 with references, assumptions, uncertainties; 8 flagged provisional. Need: professional review, state taxes (US), church tax (DE), marginal relief (IN), MFJ filing (US). North Korea not added: no published individual tax law to cite |
+| 6 Instant switching | ✅ | Client-side memoized recalculation; one `/api/analyze` call per analysis (verified in network log) |
+| 7 More protocols | 🟡 | HertzFlow live (BNB Chain, verified on-chain); Bulk Trade live (Solana, verified against Bulk's account totals); OpenSea NFTs live (EVM chains OpenSea indexes, verified on-chain; needs `OPENSEA_API_KEY`); 14 more researched as `planned` |
+| 8 Reporting | 🟡 | One accountant workbook (.xlsx for Google Sheets): Summary, Tax calculation, Transactions with source links, By asset or market. Not yet: persisted calculation history |
+| 9 Surf | 🟡 | Surf Data API base URL, auth, credit costs, rate limits verified from docs; `SurfDataProvider` stub disabled until endpoint shapes are verified with a key |
+| 10 Validation & launch | ⬜ | |
+
+## Verification log
+- Hyperliquid: `0x3390…388a` — 11,359 events in 9 requests; repeat analysis served from cache with 0 provider requests.
+- Polymarket: `0x75a4…4f33` — 428 events; per-market realized P&L (net of fees) matched Polymarket `/closed-positions` for 70/72 markets within $0.02. Fee handling was added after this check exposed a gap.
+- 2026-11-03: Polymarket Data API v1 retired (2 Nov 2026); migrated to v2. Same wallet, 496 events: 83/84 fully closed markets match `/v2/positions?status=CLOSED` realized P&L within $0.02; every event carries a tx hash and market slug.
+- 2026-11-03: HertzFlow wallet `0x0FdE…6007` — 29 records (6 opens, 6 closes, TP bookkeeping, 1 failed open); net realized −$50.35. Each close's net matched the USD1 actually paid out on-chain (receipt Transfer logs) within $0.01.
+- 2026-11-03: Bulk — first checks hit `exchange-api.bulk.trade`, which the official docs list as TESTNET (the SDK README shows it unlabelled), so every real account was "not found". On mainnet (`mainnet-api1`): `YBH2…534ms` 1,380 events (14 liquidations, 1,245 funding payments) — rebuilt realized −10,743.7679, fees and funding equal Bulk's totals, open SOL 300.6113075 @ 114.915 equals Bulk's, and deposits + realized + fees + funding = its margin balance exactly. `3FrB…GsHSp` — rebuilt realized +544,030.5061 vs Bulk +544,030.5001; its cash balance does not reconcile with its own public history by 122,594 USDC (ADL on XRP), which GENCASO now flags.
+- 2026-11-03: tax-law review of all 22 jurisdictions against current sources. Fixed: Japan basic deduction is tiered by income (2025: ¥950k–¥580k; 2026 reform: ¥1.04m up to ¥4.89m) — a flat ¥580k overstated tax for most people; France 2025 gains now 31.4% (LFSS 2026 CSG rise covers 2025 capital income, per impots.gouv). Confirmed as law: Australia 2026-27 15% bracket, India FY2026-27 slabs unchanged. Confirmed unchanged: Germany §22 Nr.3 €256, South Africa 2026/27 tables and R50k exclusion, Korea 2027 start, Vietnam 0.1% from 27 Mar 2026, Turkey bill withdrawn 27 Mar 2026, Ukraine 10225-d still not passed.
+- 2026-11-03: OpenSea (NFTs) — wallet `0xd6c0…d5e8`, 14 sales (7 buys, 7 sells; ETH, WETH, Blur BETH): every one matches its Ethereum receipt on NFT transfer, time and price (WETH/BETH Transfer logs, tx value, Blur Execution721Packed price; one 2-NFT sweep). ETH valued at the Coinbase daily close (2026-10-15: $2,439.45, matches). Heavy wallet `0x1fee…b59b`: 1,859 events in 16 requests, 18 s; 117 sales with no purchase in history flagged. NFT rules added to all 22 tax modules (India VDA per sale, Germany §23 one-year rule and €1,000 Freigrenze, Australia CGT discount, Korea collectible NFTs out of scope, Russia main NDFL base, US collectibles caveat).
+- 2026-11-04: OpenSea key renewal — when OPENSEA_API_KEY is unset or rejected (401/403), the server mints a free key (`POST /api/v2/auth/keys`, 7-day expiry), stores it in `.cache/opensea-key.json` and replaces it a day before expiry, as OpenSea's docs advise. Live check: mint returns 201 with `api_key` + `expires_at`, and the new key reads events (200). Note: on this date OpenSea also answered event reads with no key or a bogus key (200), whereas on 2026-11-03 a missing key returned 401.
+- 2026-11-04: second tax-law check. Fixed: Pakistan TY2027 (Jul 2026–Jun 2027, the current year) was missing — added (non-salaried slabs unchanged by the Finance Act 2026; crypto CGT not enacted); Germany Soli exemption threshold now per year (2024 €18,130, 2025 €19,950, 2026 €20,350, was 19,950 for all) and the 2026 tariff marked verified (Grundfreibetrag €12,348); India FY2026-27 now notes the Income-tax Act, 2025 (in force 1 Apr 2026, same rules under new section numbers); Japan: FIEA amendments passed July 2026, ~20% separate taxation from 2028 for registered-platform assets only; Korea: ruling party pushing a delay to 2029 (3 Nov 2026), not yet law; Vietnam: PIT Law 109/2025/QH15 cited. Checked, no change needed: France (PLF 2027 keeps 31.4%; crypto amendments still in debate), UK (Budget 28 Oct 2026 left CGT and the £3,000 exemption alone), Malaysia (Budget 2027 cuts apply from YA2027), Ukraine (10225-d still not passed), Philippines, Russia, US.
+- 2026-11-04: deep check of every module's numbers. Fixed: Australia Medicare levy used the 2024-25 low-income threshold (A$27,222) for every year and skipped the 10c phase-in — now per year (2025-26 A$28,011) with phase-in; Sri Lanka 15% CGT starts 3 June 2026 (Speaker's certification = enactment), not 5 June (Gazette), and the small-gains exemption (each gain ≤ Rs 50k, total ≤ Rs 600k) was missing; Indonesia citations (PMK 81/2024 for Jan–Jul 2025; PMK 50/2025 not shown to cover derivatives). Re-confirmed against official/Big-4 sources: US 2024–26 brackets, standard deduction and LTCG bands; Germany 2024–26 §32a coefficients; SARS 2025–27 tables, rebates, R50k exclusion; Nigeria NTA bands and digital-asset rules; LITO; Pakistan, Malaysia, Singapore, Philippines rate tables.
+- 2026-11-04: removed known simplifications: UK 2024-25 CGT split at 30 Oct 2024 (10/20% → 18/24%) and personal-allowance taper above £100k; India s.87A marginal relief; Germany Soli phase-in (11.9% of tax above the Freigrenze) and Günstigerprüfung (§32d Abs. 6); Japan inhabitant tax on its own base (¥430k deduction); Nigeria 2025 rewards at PITA bands after the consolidated relief allowance; Russia 2024 wording (13/15% at ₽5m was the law, not an approximation). Still not modelled (stated in-app): India surcharge marginal relief, US state tax/MFJ, church tax, business-income regimes.
+- 2026-11-03: accountant workbook built from the Hyperliquid test wallet: 11,020 transactions, 1.8 MB, 1.5 s; 8,694 clickable transaction links.
+- Tests: 39 unit tests (engine, providers' normalizers, the tax modules' calendars and key rules, switching/memoization).
+- 2026-11-03: all 16 currencies returned for the Hyperliquid test wallet (ECB in 1 request; PKR/LKR/VND/NGN in 74 CDN requests, 0 errors); switching across 13 new countries made 0 `/api/analyze` calls.
+
+## Unsupported / known gaps
+- Hyperliquid API exposes only the 10,000 most recent fills — older P&L is flagged missing.
+- Hyperliquid spot fills, vault deposits and sub-account transfers are excluded/treated as transfers.
+- Polymarket requires the proxy wallet address; SPLIT cost allocation is approximate (flagged).
+- Solana addresses are recognised but no Solana protocol is integrated.
+- In-memory cache/rate limiting/usage are per server instance and reset on restart.
+
+## Technical risks
+1. **Tax interpretations** — perps and prediction markets are unsettled in every jurisdiction; modules state assumptions but need adviser review before any claim beyond "estimate".
+2. **Payload size** — very active wallets return multi-MB datasets to the browser; move to server-side summarisation + paginated events if needed.
+3. **Upstream availability** — Frankfurter returned a transient 522 during testing (retry added); Polymarket domains are blocked by some ISPs' DNS.
+4. **Year parameters** — FY2026-27 (IN), 2026 (DE) and 2026-27 (AU) parameters are marked unverified in-app.
+5. **Moving rules** — Korea (2027 start), Pakistan (proposed crypto CGT), Türkiye (bill status), Vietnam and Indonesia (scope for offshore/derivatives) are provisional and need re-checking as laws change.
