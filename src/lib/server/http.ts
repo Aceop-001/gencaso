@@ -19,7 +19,10 @@ const lastHit = (g.__gencasoLastHit ??= new Map());
 
 // surf: Surf's Data API allows 100 requests/min per key, so backfill requests are spaced 600 ms apart.
 const MIN_INTERVAL_MS: Record<string, number> = { hyperliquid: 60, polymarket: 120, bulk: 100, hertzflow: 100, opensea: 250, blockscout: 150, surf: 600, coinbase: 120, fx: 0, "fx-cdn": 0 };
-const TIMEOUT_MS: Record<string, number> = { fx: 8_000, "fx-cdn": 8_000, blockscout: 8_000 };
+const TIMEOUT_MS: Record<string, number> = { fx: 8_000, "fx-cdn": 8_000, blockscout: 12_000 };
+
+/** "blockscout-base" → "blockscout": per-host names share their family's pacing and timeout. */
+const family = (provider: string) => provider.split("-")[0];
 
 export function getUsage(): UsageRecord[] {
   return [...usage.values()];
@@ -35,7 +38,7 @@ function record(provider: string, ok: boolean, bytes: number) {
 }
 
 async function throttle(provider: string) {
-  const gap = MIN_INTERVAL_MS[provider] ?? 100;
+  const gap = MIN_INTERVAL_MS[provider] ?? MIN_INTERVAL_MS[family(provider)] ?? 100;
   const wait = (lastHit.get(provider) ?? 0) + gap - Date.now();
   if (wait > 0) await new Promise((r) => setTimeout(r, wait));
   lastHit.set(provider, Date.now());
@@ -62,7 +65,7 @@ async function request<T>(provider: string, url: string, init?: RequestInit): Pr
     await throttle(provider);
     let res: Response;
     try {
-      res = await fetch(url, { ...init, cache: "no-store", signal: AbortSignal.timeout(TIMEOUT_MS[provider] ?? 20_000) });
+      res = await fetch(url, { ...init, cache: "no-store", signal: AbortSignal.timeout(TIMEOUT_MS[provider] ?? TIMEOUT_MS[family(provider)] ?? 20_000) });
     } catch (e) {
       record(provider, false, 0);
       throw new Error(`${provider}: network error (${(e as Error).message})`);

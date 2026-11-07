@@ -247,6 +247,7 @@ const LIMITS_ONCHAIN = [
   `Covers ${chainList(ONCHAIN_CHAINS.map((c) => c.chain))} only; NFT trades on other chains are missing until OpenSea is back`,
   "Prices are the wallet's net payment in each transaction, so marketplace fees and royalties are already deducted; gas is not included",
   "Several NFTs in one transaction share its payment by units; mixed swaps and unpaid transfers are skipped, not guessed",
+  "Liquidity-position NFTs (Uniswap V3 and similar) are DeFi deposits, not NFT trades, and are excluded",
 ];
 
 export const OpenSeaDataProvider: DataProvider = {
@@ -262,6 +263,7 @@ export const OpenSeaDataProvider: DataProvider = {
     let key: OpenSeaKey | null = first;
     let origin: SaleOrigin = "opensea";
     let openSeaError: string | undefined;
+    let backupNote = "";
 
     // 1. OpenSea's API
     if (first) {
@@ -283,11 +285,13 @@ export const OpenSeaDataProvider: DataProvider = {
       if (!oc.chainsChecked.length) throw new Error(`opensea: ${openSeaError} The on-chain backup (Blockscout) is unavailable too.`);
       sales = oc.sales;
       origin = "onchain";
-      warnings.push(`OpenSea unavailable: ${openSeaError} NFT trades were rebuilt from on-chain data on ${chainList(ONCHAIN_CHAINS.map((c) => c.chain).filter((c) => oc.chainsChecked.includes(c)))} instead; trades on other chains are missing.`);
-      if (oc.failedChains.length) warnings.push(`On-chain NFT backup could not read ${oc.failedChains.join(", ")}.`);
+      // OpenSea being down is not the user's problem when the backup worked: one calm note, details in the source report
+      const read = chainList(ONCHAIN_CHAINS.map((c) => c.chain).filter((c) => oc.chainsChecked.includes(c)));
+      warnings.push(`NFT trades come from on-chain data (${read}) because OpenSea's API isn't available right now. NFTs on other chains (e.g. HyperEVM) aren't included.`);
+      if (oc.failedChains.length) warnings.push(`On-chain NFT data for ${chainList(oc.failedChains)} couldn't be read this time; run the analysis again to include it.`);
       if (oc.skipped.mixed) warnings.push(`On-chain NFT backup: ${oc.skipped.mixed} transaction(s) mixed several NFTs or currencies and were skipped rather than guessed.`);
-      if (oc.skipped.failed) warnings.push(`On-chain NFT backup: ${oc.skipped.failed} transaction(s) could not be read (the explorer timed out on them) and were skipped.`);
-      if (oc.skipped.capped) warnings.push(`On-chain NFT backup: history was capped; ${oc.skipped.capped} older transaction(s) were not read.`);
+      if (oc.skipped.capped) warnings.push(`On-chain NFT backup: ${oc.skipped.capped} older NFT transaction(s) are beyond what the backup reads and aren't included.`);
+      backupNote = `OpenSea: ${openSeaError}`;
     }
 
     // Price every payment token on the days it was used
@@ -329,7 +333,7 @@ export const OpenSeaDataProvider: DataProvider = {
         requests,
         fromCache: false,
         message: [
-          origin === "onchain" ? `Backup: OpenSea was unavailable, so NFT trades were rebuilt from on-chain data (${ONCHAIN_CHAINS.map((c) => c.chain).join(", ")}).` : "",
+          origin === "onchain" ? `Backup: NFT trades rebuilt from on-chain data (${chainList(ONCHAIN_CHAINS.map((c) => c.chain))}). ${backupNote}` : "",
           events.length ? "" : origin === "onchain" ? "No paid NFT trades found on-chain for this address." : "No NFT sales for this address on OpenSea.",
           origin === "opensea" && key?.source === "auto" ? `Using a free OpenSea key, renewed automatically (current one expires ${new Date(key.expiresAt!).toISOString().slice(0, 10)}).` : "",
         ].filter(Boolean).join(" ") || undefined,

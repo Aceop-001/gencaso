@@ -120,93 +120,151 @@ describe("on-chain NFT backup", () => {
   });
 });
 
-describe("on-chain backup: resilience", () => {
-  const list = (items: unknown[]) => ({ items, next_page_params: null });
-  const txPage = (hash: string) => ({
-    hash,
-    status: "ok",
-    timestamp: "2026-11-02T19:28:59.000000Z",
-    value: "0",
-    from: { hash: "0xbundler" },
-    to: { hash: SEAPORT },
-    token_transfers: [erc20("WETH", BUYER, ME, 2.2), erc20("WETH", ME, FEE, 0.022)],
-    token_transfers_overflow: false,
+describe("on-chain backup: bulk reads", () => {
+  const T = (iso: string) => `${iso}T12:00:00.000000Z`;
+  const page = (items: unknown[], more = false) => ({ items, next_page_params: more ? { page: 2 } : null });
+  const move = (hash: string, ts = T("2026-11-02"), from = ME, to = BUYER, token: Record<string, string> = {}) => ({
+    ...nft(from, to),
+    transaction_hash: hash,
+    timestamp: ts,
+    token: { address_hash: PPG, symbol: "PPG", name: "PudgyPenguins", type: "ERC-721", ...token },
   });
-  const move = (hash: string) => ({ ...nft(ME, BUYER), transaction_hash: hash });
+  const weth = (hash: string, from: string, to: string, amount: number, ts = T("2026-11-02")) => ({ ...erc20("WETH", from, to, amount), transaction_hash: hash, timestamp: ts });
+  const leg = (hash: string, from: string, to: string, amount: number, ts = T("2026-11-02")) => ({ ...internal(from, to, amount, hash), timestamp: ts });
 
-  function fake(routes: Record<string, unknown>, headers: Record<string, string>[] = []) {
+  /** Fake Blockscout: routes by chain host and list name; anything per-transaction is a test failure. */
+  function fake(routes: Record<string, unknown>, log: string[] = []) {
     return {
-      getJson: async (_p: string, url: string, h?: Record<string, string>) => {
-        if (h) headers.push(h);
+      getJson: async (p: string, url: string, h?: Record<string, string>) => {
+        log.push(`${p} ${url}`);
+        if (!h?.["User-Agent"]) throw new Error("missing User-Agent");
+        if (/\/api\/v2\/transactions\//.test(url)) throw new Error(`per-transaction request: ${url}`);
         for (const [k, v] of Object.entries(routes)) if (url.includes(k)) {
           if (v === "fail") throw new Error("blockscout: network error (timeout)");
           return typeof v === "function" ? (v as () => unknown)() : v;
         }
-        throw new Error(`unexpected ${url}`);
+        return page([]); // every other list is empty
       },
       postJson: async () => { throw new Error("not used"); },
     } as never;
   }
-  const emptyChains = {
-    "optimism.blockscout.com": list([]), "base.blockscout.com": list([]),
-    "arbitrum.blockscout.com": list([]), "polygon.blockscout.com": list([]),
-  };
+  const NFTS = "token-transfers?type=ERC-721";
+  const ERC20 = "token-transfers?type=ERC-20";
+  const eth = (path: string) => `eth.blockscout.com/api/v2/addresses/${ME}/${path}`;
 
-  it("reads every ETH leg of the wallet in one paged list, not per transaction", async () => {
+  it("prices trades from wallet-wide lists, with no per-transaction requests", async () => {
+    const log: string[] = [];
     const http = fake({
-      [`/api/v2/addresses/${ME}/internal-transactions`]: list([internal(SEAPORT, ME, 1.0395, "0xgood")]),
-      [`eth.blockscout.com/api/v2/addresses/${ME}/token-transfers`]: list([move("0xgood")]),
-      "/transactions/0xgood": { ...txPage("0xgood"), token_transfers: null },
-      ...emptyChains,
-    });
+      [eth(NFTS)]: page([move("0xsale")]),
+      [eth(ERC20)]: page([weth("0xsale", BUYER, ME, 2.2), weth("0xsale", ME, FEE, 0.022)]),
+    }, log);
     const r = await fetchOnchainNftSales(http, ME);
     expect(r.sales).toHaveLength(1);
+    expect(qty(r.sales[0].payment!)).toBeCloseTo(2.178, 6);
+    expect(log.some((l) => /\/transactions\/0x/.test(l))).toBe(false);
+    expect(r.failedChains).toEqual([]);
+  });
+
+  it("ETH paid out by a marketplace contract and forwarded to a vault (smart wallet)", async () => {
+    const http = fake({
+      [eth(NFTS)]: page([move("0xmayc")]),
+      [eth("internal-transactions")]: page([leg("0xmayc", SEAPORT, FEE, 0.0105), leg("0xmayc", SEAPORT, ME, 1.0395), leg("0xmayc", ME, VAULT, 1.0395)]),
+    });
+    const r = await fetchOnchainNftSales(http, ME);
     expect(qty(r.sales[0].payment!)).toBeCloseTo(1.0395, 6);
   });
 
-  it("one unreadable transaction never loses the chain's other trades", async () => {
+  it("a purchase paid with the wallet's own transaction value", async () => {
     const http = fake({
-      ...emptyChains,
-      [`eth.blockscout.com/api/v2/addresses/${ME}/token-transfers`]: list([move("0xgood"), move("0xslow")]),
-      "/transactions/0xgood": txPage("0xgood"),
-      "/transactions/0xslow": "fail",
-      "/internal-transactions": list([]),
+      [eth(NFTS)]: page([move("0xbuy", T("2026-11-01"), "0xseller", ME)]),
+      [eth("transactions")]: page([{ hash: "0xbuy", timestamp: T("2026-11-01"), status: "ok", value: String(BigInt(25) * BigInt(1e17)), from: { hash: ME }, to: { hash: SEAPORT } }]),
     });
     const r = await fetchOnchainNftSales(http, ME);
-    expect(r.sales).toHaveLength(1);
-    expect(r.sales[0].transaction).toBe("0xgood");
-    expect(r.skipped.failed).toBe(1);
-    expect(r.failedChains).toEqual([]);
-    expect(r.chainsChecked).toContain("ethereum");
+    expect(r.sales[0].buyer).toBe(ME);
+    expect(qty(r.sales[0].payment!)).toBeCloseTo(2.5, 6);
   });
 
-  it("a chain that cannot be listed does not stop the others", async () => {
+  it("Polygon pays in POL, never counted as ETH", async () => {
     const http = fake({
-      "eth.blockscout.com/api/v2/addresses": "fail",
-      "optimism.blockscout.com/api/v2/transactions/0xop/internal": list([]),
-      "optimism.blockscout.com/api/v2/addresses": list([move("0xop")]),
-      "optimism.blockscout.com/api/v2/transactions/0xop": txPage("0xop"),
-      ...emptyChains,
+      [`polygon.blockscout.com/api/v2/addresses/${ME}/${NFTS}`]: page([move("0xmint", T("2026-06-08"), "0x0000000000000000000000000000000000000000", ME)]),
+      [`polygon.blockscout.com/api/v2/addresses/${ME}/transactions`]: page([{ hash: "0xmint", timestamp: T("2026-06-08"), status: "ok", value: String(BigInt(8) * BigInt(1e18)), from: { hash: ME }, to: { hash: "0xminter" } }]),
+    });
+    const r = await fetchOnchainNftSales(http, ME);
+    expect(r.sales[0].chain).toBe("polygon");
+    expect(r.sales[0].payment!.symbol).toBe("POL");
+    expect(qty(r.sales[0].payment!)).toBeCloseTo(8, 6);
+  });
+
+  it("liquidity-position NFTs (Uniswap V3) are DeFi deposits, not NFT trades", async () => {
+    const http = fake({
+      [`arbitrum.blockscout.com/api/v2/addresses/${ME}/${NFTS}`]: page([move("0xlp", T("2026-03-23"), "0x0000000000000000000000000000000000000000", ME, { symbol: "UNI-V3-POS", name: "Uniswap V3 Positions NFT-V1" })]),
+      [`arbitrum.blockscout.com/api/v2/addresses/${ME}/transactions`]: page([{ hash: "0xlp", timestamp: T("2026-03-23"), status: "ok", value: String(BigInt(27) * BigInt(1e17)), from: { hash: ME }, to: { hash: "0xnpm" } }]),
+    });
+    const r = await fetchOnchainNftSales(http, ME);
+    expect(r.sales).toEqual([]);
+    expect(r.skipped.positions).toBe(1);
+  });
+
+  it("free airdrops (spam) cost nothing and are not trades", async () => {
+    const spam = Array.from({ length: 40 }, (_, k) => move(`0xspam${k}`, T("2026-10-01"), "0xspammer", ME));
+    const log: string[] = [];
+    const r = await fetchOnchainNftSales(fake({ [eth(NFTS)]: page(spam) }, log), ME);
+    expect(r.sales).toEqual([]);
+    expect(r.skipped.unpaid).toBe(40);
+    expect(log.filter((l) => l.startsWith("blockscout-ethereum")).length).toBe(4); // 4 list reads, not 40+
+  });
+
+  it("payment lists stop once they reach back past the oldest NFT move", async () => {
+    const log: string[] = [];
+    const http = fake({
+      [eth(NFTS)]: page([move("0xsale", T("2026-11-02"))]),
+      // Newest-first page whose oldest item is already older than the NFT move: no need for page 2
+      [eth(ERC20)]: page([weth("0xsale", BUYER, ME, 1, T("2026-11-02")), weth("0xold", BUYER, ME, 9, T("2026-01-01"))], true),
+    }, log);
+    const r = await fetchOnchainNftSales(http, ME);
+    expect(qty(r.sales[0].payment!)).toBeCloseTo(1, 6);
+    expect(log.filter((l) => l.includes(ERC20) && l.includes("eth.blockscout")).length).toBe(1);
+  });
+
+  it("NFT moves older than the payment data that was read are reported, never guessed", async () => {
+    const http = fake({
+      [eth(NFTS)]: page([move("0xnew", T("2026-11-02")), move("0xold", T("2025-01-01"))]),
+      // One page allowed, more pages exist, and they never reach back to 2025
+      [eth(ERC20)]: page([weth("0xnew", BUYER, ME, 1, T("2026-11-02")), weth("0xx", BUYER, ME, 1, T("2026-10-01"))], true),
+    });
+    const r = await fetchOnchainNftSales(http, ME, { maxPaymentPages: 1 });
+    expect(r.sales.map((s) => s.transaction)).toEqual(["0xnew"]);
+    expect(r.skipped.capped).toBe(1);
+  });
+
+  it("a chain hiccup is retried once, and a failed attempt never double-counts", async () => {
+    let calls = 0;
+    const http = fake({
+      [eth(NFTS)]: () => (++calls === 1 ? Promise.reject(new Error("blockscout: network error (timeout)")) : page([move("0xsale")])),
+      [eth(ERC20)]: page([weth("0xsale", BUYER, ME, 2)]),
+    });
+    const r = await fetchOnchainNftSales(http, ME);
+    expect(calls).toBe(2);
+    expect(r.sales).toHaveLength(1);
+    expect(r.failedChains).toEqual([]);
+  });
+
+  it("a chain that keeps failing is reported without touching the others", async () => {
+    const http = fake({
+      [eth(NFTS)]: "fail",
+      [`optimism.blockscout.com/api/v2/addresses/${ME}/${NFTS}`]: page([move("0xop")]),
+      [`optimism.blockscout.com/api/v2/addresses/${ME}/${ERC20}`]: page([weth("0xop", BUYER, ME, 1)]),
     });
     const r = await fetchOnchainNftSales(http, ME);
     expect(r.failedChains).toEqual(["ethereum"]);
-    expect(r.sales).toHaveLength(1);
+    expect(r.sales.map((s) => s.chain)).toEqual(["optimism"]);
     expect(r.chainsChecked).toEqual(expect.arrayContaining(["optimism", "base", "arbitrum", "polygon"]));
   });
 
-  it("a spent budget reports capped work instead of running forever", async () => {
-    const http = fake({ ...emptyChains, [`eth.blockscout.com/api/v2/addresses/${ME}/token-transfers`]: list([move("0xa"), move("0xb")]) });
-    const r = await fetchOnchainNftSales(http, ME, { budgetMs: -1 });
-    expect(r.sales).toEqual([]);
+  it("a spent budget makes no requests and reports the gap", async () => {
+    const r = await fetchOnchainNftSales(fake({}), ME, { budgetMs: -1 });
     expect(r.requests).toBe(0);
+    expect(r.sales).toEqual([]);
     expect(r.skipped.capped).toBeGreaterThan(0);
-  });
-
-  it("every request carries a User-Agent (Base, Arbitrum and Polygon need one)", async () => {
-    const headers: Record<string, string>[] = [];
-    const http = fake({ ...emptyChains, [`eth.blockscout.com/api/v2/addresses/${ME}/token-transfers`]: list([]) }, headers);
-    await fetchOnchainNftSales(http, ME);
-    expect(headers.length).toBeGreaterThan(0);
-    for (const h of headers) expect(h["User-Agent"]).toBeTruthy();
   });
 });

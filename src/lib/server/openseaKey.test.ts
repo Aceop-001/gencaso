@@ -95,7 +95,7 @@ function busyKeyService(opts: { keylessOk: boolean; blockscoutDown?: boolean }) 
       calls.push(`GET ${provider} ${k ?? "(no key)"}`);
       if (provider === "opensea" && k === undefined && !opts.keylessOk) throw new Error("opensea: HTTP 401");
       if (provider === "opensea" && k === "expired") throw new Error("opensea: HTTP 401");
-      if (provider === "blockscout" && opts.blockscoutDown) throw new Error("blockscout: HTTP 503");
+      if (provider.startsWith("blockscout") && opts.blockscoutDown) throw new Error("blockscout: HTTP 503");
       return { asset_events: [], next: null } as T;
     },
     async postJson<T>(provider: string): Promise<T> {
@@ -129,7 +129,8 @@ describe("OpenSea when the free-key service is busy", () => {
     const res = await run(http);
     expect(calls.slice(0, 2)).toEqual(["POST opensea", "GET opensea (no key)"]);
     expect(calls.some((c) => c.startsWith("GET blockscout"))).toBe(true);
-    expect(res.warnings.join(" ")).toMatch(/OpenSea unavailable.*Set OPENSEA_API_KEY.*rebuilt from on-chain data/);
+    expect(res.warnings.join(" ")).toMatch(/NFT trades come from on-chain data .* because OpenSea.s API isn.t available/);
+    expect(res.report.message).toMatch(/Set OPENSEA_API_KEY/);
     expect(res.report.message).toMatch(/Backup/);
   });
 
