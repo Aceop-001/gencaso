@@ -10,7 +10,9 @@ import { MoreMenu } from "@/components/MoreMenu";
 import { ScanSequence } from "@/components/ScanSequence";
 import { SiteFooter } from "@/components/Socials";
 import { WalletBar } from "@/components/WalletBar";
+import { combineDatasets, walletsOf } from "@/lib/engine/combine";
 import type { WalletDataset } from "@/lib/engine/schema";
+import { shortAddr } from "@/lib/format";
 import { PROTOCOLS } from "@/lib/registry";
 import type { CountryCode } from "@/lib/tax";
 
@@ -32,15 +34,24 @@ export default function Home() {
   const [dataset, setDataset] = useState<WalletDataset | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const analyse = useCallback(async (addr: string, refresh = false) => {
-    setAddress(addr);
+  const analyse = useCallback(async (addrs: string[], refresh = false) => {
+    setAddress(addrs.length > 1 ? `${addrs.length} wallets · ${addrs.map(shortAddr).join(", ")}` : addrs[0]);
     setError(null);
     setPhase("scanning");
     try {
-      const res = await fetch("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ address: addr, refresh }) });
-      const body = await res.json();
-      if (!res.ok) throw new Error(body.error ?? `Request failed (${res.status})`);
-      setDataset(body as WalletDataset);
+      // Each wallet is analysed (and cached) on its own, then combined into one report
+      const one = async (addr: string): Promise<WalletDataset> => {
+        const res = await fetch("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ address: addr, refresh }) });
+        const body = await res.json();
+        if (!res.ok) throw new Error(body.error ?? `Request failed (${res.status})`);
+        return body as WalletDataset;
+      };
+      const settled = await Promise.allSettled(addrs.map(one));
+      const ok = settled.flatMap((r) => (r.status === "fulfilled" ? [r.value] : []));
+      const failed = settled.flatMap((r, i) => (r.status === "rejected" ? [`${shortAddr(addrs[i])} could not be analysed: ${(r.reason as Error).message}`] : []));
+      if (!ok.length) throw new Error(failed.join(" · "));
+      const combined = combineDatasets(ok);
+      setDataset(failed.length ? { ...combined, dataWarnings: [...failed, ...combined.dataWarnings] } : combined);
       setPhase("results");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (e) {
@@ -124,7 +135,7 @@ export default function Home() {
               {/* Ambient, non-interactive caustics: keeps moving, ignores clicks */}
               <CausticBackground variant="ambient" />
               <div className="relative z-10">
-              <Results dataset={dataset} country={country} onCountry={setCountry} onReset={reset} onRefresh={() => analyse(dataset.address, true)} />
+              <Results dataset={dataset} country={country} onCountry={setCountry} onReset={reset} onRefresh={() => analyse(walletsOf(dataset), true)} />
               </div>
             </motion.section>
           )

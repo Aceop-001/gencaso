@@ -140,10 +140,15 @@ export interface ProviderReport {
   fromCache: boolean;
   message?: string;
   limitations: string[];
+  /** Set in a combined (multi-wallet) report: which wallet this source report is for */
+  wallet?: string;
 }
 
 export interface WalletDataset {
+  /** The wallet analysed; in a combined report, the first wallet (see `wallets`) */
   address: string;
+  /** Combined report: every wallet included, in the order given. Absent for a single wallet. */
+  wallets?: string[];
   isDemo: boolean;
   fetchedAt: number;
   events: FinancialEvent[];

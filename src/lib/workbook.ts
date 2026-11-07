@@ -45,7 +45,7 @@ export function buildWorkbookSheets(ds: WalletDataset, r: TaxResult, profile: Ta
   const summary: WCell[][] = [
     [{ value: "GENCASO tax estimate", type: String, fontWeight: "bold" }, s("Estimate only — not professional tax advice. Verify before filing.", { color: "#B45309" })],
     [],
-    row("Wallet", s(ds.address)),
+    row(ds.wallets && ds.wallets.length > 1 ? "Wallets" : "Wallet", s((ds.wallets ?? [ds.address]).join(", "))),
     row("Demo data", s(ds.isDemo ? "Yes — synthetic, not a real liability" : "No")),
     row("Country", s(j.name)),
     row("Tax year", s(r.taxYear.label)),
@@ -163,7 +163,7 @@ export function buildWorkbookSheets(ds: WalletDataset, r: TaxResult, profile: Ta
 }
 
 export function workbookFileName(ds: WalletDataset, r: TaxResult, j: Jurisdiction) {
-  const who = ds.isDemo ? "demo" : `${ds.address.slice(0, 6)}${ds.address.slice(-4)}`;
+  const who = ds.isDemo ? "demo" : ds.wallets && ds.wallets.length > 1 ? `${ds.wallets.length}-wallets` : `${ds.address.slice(0, 6)}${ds.address.slice(-4)}`;
   return `GENCASO_${j.name.replace(/[^A-Za-z]+/g, "")}_${r.taxYear.id.replace(/[^\w-]+/g, "-")}_${who}.xlsx`;
 }
 

@@ -75,7 +75,7 @@ export function EventsTable({ events }: { events: readonly FinancialEvent[] }) {
           </thead>
           <tbody className="num divide-y divide-line">
             {view.map((e) => (
-              <tr key={e.id} className="transition hover:bg-blue/5">
+              <tr key={`${e.account}|${e.id}`} className="transition hover:bg-blue/5">
                 <td className="whitespace-nowrap px-4 py-2.5 font-mono text-xs text-ink-3">{fmtDate(e.timestamp)}</td>
                 <td className="whitespace-nowrap px-4 py-2.5 text-ink-2">{e.type.replace(/_/g, " ").toLowerCase()}</td>
                 <td className="max-w-[260px] truncate px-4 py-2.5 text-ink" title={e.market?.name ?? e.asset}>

@@ -4,6 +4,7 @@ import { animate, motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { WalletDataset } from "@/lib/engine/schema";
 import { dailySeries, summarize } from "@/lib/engine/summary";
+import { walletLabel, walletsOf } from "@/lib/engine/combine";
 import { fmtDate, fmtMoney, fmtPct, fmtSigned, shortAddr } from "@/lib/format";
 import { protocolById } from "@/lib/registry";
 import { downloadWorkbook } from "@/lib/workbook";
@@ -74,7 +75,7 @@ export function Results({ dataset, country, onCountry, onReset, onRefresh }: { d
     return (
       <div className="glass mx-auto max-w-xl rounded-3xl p-8 text-center">
         <div className="text-lg text-ink">No supported trading activity found</div>
-        <p className="mt-2 text-sm text-ink-2">We checked {dataset.providers.map((p) => protocolById(p.protocol)?.name ?? p.provider).join(", ")} for {shortAddr(dataset.address)}. Nothing taxable was found, so no tax was calculated.</p>
+        <p className="mt-2 text-sm text-ink-2">We checked {dataset.providers.map((p) => protocolById(p.protocol)?.name ?? p.provider).join(", ")} for {walletLabel(dataset)}. Nothing taxable was found, so no tax was calculated.</p>
         <ProviderList dataset={dataset} />
         {dataset.dataWarnings.length > 0 && <ul className="mt-4 space-y-1 text-left text-xs text-warn">{dataset.dataWarnings.map((w) => <li key={w}>{w}</li>)}</ul>}
         <button onClick={onReset} className="mt-6 rounded-full border border-line px-5 py-2 text-sm text-ink hover:border-line-strong">Analyse another wallet</button>
@@ -94,7 +95,8 @@ export function Results({ dataset, country, onCountry, onReset, onRefresh }: { d
       <div className="glass relative z-30 flex flex-col gap-3 rounded-3xl p-3 lg:flex-row lg:items-center">
         <div className="flex min-w-0 items-center gap-3 px-2">
           <span className="h-2 w-2 shrink-0 rounded-full bg-good shadow-[0_0_10px_var(--good)]" />
-          <span className="truncate font-mono text-sm text-ink" title={dataset.address}>{dataset.isDemo ? "demo wallet" : shortAddr(dataset.address)}</span>
+          <span className="truncate font-mono text-sm text-ink" title={walletsOf(dataset).join("\n")}>{walletLabel(dataset)}</span>
+          {walletsOf(dataset).length > 1 && <span className="hidden truncate font-mono text-xs text-ink-3 md:inline">{walletsOf(dataset).map(shortAddr).join(" · ")}</span>}
           <span className="hidden text-xs text-ink-3 sm:inline">synced {fmtDate(dataset.fetchedAt)} UTC</span>
         </div>
         <div className="flex flex-1 flex-wrap items-center gap-2 lg:justify-end">
@@ -153,7 +155,7 @@ export function Results({ dataset, country, onCountry, onReset, onRefresh }: { d
                   netTradingResult: s.netTradingResult,
                   taxableUsd: toUsd(result.taxableLocal),
                   effective,
-                  address: dataset.address,
+                  address: walletsOf(dataset).length > 1 ? walletLabel(dataset) : dataset.address,
                   isDemo: !!dataset.isDemo,
                   moduleVersion: result.moduleVersion,
                   provisional: result.provisional,
@@ -237,10 +239,11 @@ function ProviderList({ dataset }: { dataset: WalletDataset }) {
   return (
     <ul className="mt-3 space-y-2 text-left text-sm">
       {dataset.providers.map((p) => (
-        <li key={p.provider} className="flex items-start gap-3">
+        <li key={`${p.wallet ?? ""}|${p.provider}`} className="flex items-start gap-3">
           <span className={`mt-0.5 text-[10px] uppercase tracking-wider ${tone[p.status]}`}>{p.status}</span>
           <span className="flex-1">
             <span className="text-ink">{protocolById(p.protocol)?.name ?? (p.protocol === "mock" ? "Mock data" : p.provider)}</span>
+            {p.wallet && <span className="ml-2 font-mono text-[11px] text-ink-3">{shortAddr(p.wallet)}</span>}
             <span className="num ml-2 text-xs text-ink-3">{p.eventCount.toLocaleString()} events · {p.fromCache ? "cached, 0 requests" : `${p.requests} requests`}</span>
             {p.message && <span className="block text-xs text-ink-3">{p.message}</span>}
           </span>

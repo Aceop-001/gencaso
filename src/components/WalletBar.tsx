@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import type { CountryCode } from "@/lib/tax";
+import { MAX_WALLETS, splitWallets } from "@/lib/engine/combine";
 import { validateAddress } from "@/lib/validation";
 import { CountrySelect } from "./CountrySelect";
 
 /**
- * The primary interaction: [ wallet ] [ country ] [ analyse ].
+ * The primary interaction: [ wallet(s) ] [ country ] [ analyse ]. Several wallets (EVM and Solana,
+ * separated by commas, spaces or new lines) are analysed together into one combined report.
  * Layered composition (glow halo → glass shell → input) inspired by the OpenDesign
  * careers showcase's layered stage; implemented natively, no showcase code used.
  */
@@ -19,19 +21,27 @@ export function WalletBar({
 }: {
   country: CountryCode;
   onCountry: (c: CountryCode) => void;
-  onSubmit: (address: string) => void;
+  onSubmit: (addresses: string[]) => void;
   busy: boolean;
 }) {
   const [value, setValue] = useState("");
   const [focused, setFocused] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const check = value ? validateAddress(value) : null;
+  const parts = splitWallets(value);
+  const checks = parts.map((p) => validateAddress(p));
+  const allOk = checks.length > 0 && checks.every((c) => c.ok);
+  const badge = !allOk ? null : checks.length > 1 ? `${checks.length} wallets` : checks[0].kind === "demo" ? null : checks[0].kind === "evm" ? "EVM" : "Solana";
 
-  const submit = (addr = value) => {
-    const v = validateAddress(addr);
-    if (!v.ok) return setError(v.error ?? "Invalid address");
+  const submit = (raw = value) => {
+    const list = splitWallets(raw);
+    if (!list.length) return setError("Enter a public wallet address.");
+    if (list.length > MAX_WALLETS) return setError(`Up to ${MAX_WALLETS} wallets per report.`);
+    const results = list.map((p) => validateAddress(p));
+    const bad = results.findIndex((r) => !r.ok);
+    if (bad >= 0) return setError(list.length > 1 ? `Wallet ${bad + 1}: ${results[bad].error ?? "invalid address"}` : results[bad].error ?? "Invalid address");
+    if (list.length > 1 && results.some((r) => r.kind === "demo")) return setError("The demo wallet can't be combined with real wallets.");
     setError(null);
-    onSubmit(v.normalized!);
+    onSubmit(results.map((r) => r.normalized!));
   };
 
   return (
@@ -69,7 +79,7 @@ export function WalletBar({
             }}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            placeholder="Enter wallet address  0x…"
+            placeholder="Enter wallet address  0x…  (add more with commas)"
             spellCheck={false}
             autoComplete="off"
             autoCapitalize="off"
@@ -77,9 +87,9 @@ export function WalletBar({
             aria-describedby="wallet-help"
             className="h-16 w-full min-w-0 bg-transparent font-mono text-[15px] tracking-tight text-ink placeholder:font-sans placeholder:text-ink-3 focus:outline-none md:text-base"
           />
-          {check?.ok && check.kind !== "demo" && (
-            <motion.span initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="ml-2 shrink-0 rounded-full border border-good/30 bg-good/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-good">
-              {check.kind === "evm" ? "EVM" : "Solana"}
+          {badge && (
+            <motion.span key={badge} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="ml-2 shrink-0 whitespace-nowrap rounded-full border border-good/30 bg-good/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-good">
+              {badge}
             </motion.span>
           )}
         </label>
