@@ -14,7 +14,9 @@ Perp, prediction-market and NFT traders have the messiest tax data in crypto: th
 
 ## Features
 
-- **Live data:** Hyperliquid, Polymarket, Bulk Trade, HertzFlow and OpenSea (public APIs, read-only)
+- **Live data:** Hyperliquid, Polymarket, Bulk Trade, HertzFlow, GMX (Arbitrum, Avalanche) and OpenSea (public APIs, read-only)
+- **DeFi and CeFi modes:** combine up to 5 wallets, or upload exchange exports (read in your browser)
+- **Roadmap:** DefiLlama's top 67 per category, shown in the docs; each is added once verified against real accounts
 - **Never stuck on one source:** if OpenSea is down, NFT trades are rebuilt from on-chain data (Ethereum, Optimism, Base, Arbitrum, Polygon). With a Surf key, Surf fills in Hyperliquid history beyond the API's 10,000-fill limit and stands in for Polymarket when it's blocked
 - **22 countries**, each a separate, versioned tax module with cited sources and a list of what remains uncertain
 - **Every number traceable:** normalised events with explorer links, cost basis and fees

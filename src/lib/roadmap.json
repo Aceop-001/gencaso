@@ -1,0 +1,5114 @@
+{
+ "source": "DefiLlama api.llama.fi/protocols, ranked by TVL",
+ "fetchedOn": "2026-11-07",
+ "perCategory": 67,
+ "categories": [
+  {
+   "id": "perp",
+   "label": "Perp DEXs",
+   "defillamaCategory": "Derivatives",
+   "items": [
+    {
+     "rank": 1,
+     "name": "Jupiter Perpetual Exchange",
+     "chains": [
+      "Solana"
+     ],
+     "site": "jup.ag",
+     "tvlUsdM": 665,
+     "live": false
+    },
+    {
+     "rank": 2,
+     "name": "GMX EVM",
+     "chains": [
+      "Arbitrum",
+      "Avalanche",
+      "MegaETH"
+     ],
+     "site": "gmx.io",
+     "tvlUsdM": 200,
+     "live": true
+    },
+    {
+     "rank": 3,
+     "name": "Hyperliquid HLP",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "app.hyperliquid.xyz",
+     "tvlUsdM": 151,
+     "live": false
+    },
+    {
+     "rank": 4,
+     "name": "Lighter Robinhood Perps",
+     "chains": [
+      "Robinhood Chain"
+     ],
+     "site": "robinhoodchain.lighter.xyz",
+     "tvlUsdM": 114,
+     "live": false
+    },
+    {
+     "rank": 5,
+     "name": "Extended Perps",
+     "chains": [
+      "Arc",
+      "Ethereum",
+      "Starknet"
+     ],
+     "site": "app.extended.exchange",
+     "tvlUsdM": 101,
+     "live": false
+    },
+    {
+     "rank": 6,
+     "name": "Lighter LLP",
+     "chains": [
+      "zkLighter"
+     ],
+     "site": "app.lighter.xyz",
+     "tvlUsdM": 100,
+     "live": false
+    },
+    {
+     "rank": 7,
+     "name": "dYdX V4",
+     "chains": [
+      "dYdX"
+     ],
+     "site": "dydx.trade",
+     "tvlUsdM": 71,
+     "live": false
+    },
+    {
+     "rank": 8,
+     "name": "Arcus Perps",
+     "chains": [
+      "Robinhood Chain"
+     ],
+     "site": "arcus.xyz",
+     "tvlUsdM": 64,
+     "live": false
+    },
+    {
+     "rank": 9,
+     "name": "AZverse Perps",
+     "chains": [
+      "Arbitrum",
+      "Binance",
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 52,
+     "live": false
+    },
+    {
+     "rank": 10,
+     "name": "Decibel",
+     "chains": [
+      "Aptos"
+     ],
+     "site": "app.decibel.trade",
+     "tvlUsdM": 29,
+     "live": false
+    },
+    {
+     "rank": 11,
+     "name": "Apex Omni",
+     "chains": [
+      "Arbitrum",
+      "Ethereum",
+      "Base"
+     ],
+     "site": "omni.apex.exchange",
+     "tvlUsdM": 27,
+     "live": false
+    },
+    {
+     "rank": 12,
+     "name": "Papertrade",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "papertrade.xyz",
+     "tvlUsdM": 24,
+     "live": false
+    },
+    {
+     "rank": 13,
+     "name": "GMX Solana",
+     "chains": [
+      "Solana"
+     ],
+     "site": "gmtrade.xyz",
+     "tvlUsdM": 24,
+     "live": false
+    },
+    {
+     "rank": 14,
+     "name": "Phoenix Perp",
+     "chains": [
+      "Solana"
+     ],
+     "site": "phoenix.trade",
+     "tvlUsdM": 23,
+     "live": false
+    },
+    {
+     "rank": 15,
+     "name": "RISEx",
+     "chains": [
+      "RISE"
+     ],
+     "site": "rise.trade",
+     "tvlUsdM": 22,
+     "live": false
+    },
+    {
+     "rank": 16,
+     "name": "Contango V2",
+     "chains": [
+      "Arbitrum",
+      "Ethereum",
+      "Base"
+     ],
+     "site": "contango.xyz",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 17,
+     "name": "Aevo Perps",
+     "chains": [
+      "Ethereum",
+      "Arbitrum",
+      "Optimism"
+     ],
+     "site": "app.aevo.xyz",
+     "tvlUsdM": 15,
+     "live": false
+    },
+    {
+     "rank": 18,
+     "name": "Veranta",
+     "chains": [
+      "Base"
+     ],
+     "site": "veranta.xyz",
+     "tvlUsdM": 11,
+     "live": false
+    },
+    {
+     "rank": 19,
+     "name": "Reya Perps",
+     "chains": [
+      "Reya Network"
+     ],
+     "site": "app.reya.xyz",
+     "tvlUsdM": 10,
+     "live": false
+    },
+    {
+     "rank": 20,
+     "name": "MUX Perps",
+     "chains": [
+      "Arbitrum",
+      "Avalanche",
+      "Binance"
+     ],
+     "site": "mux.network",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 21,
+     "name": "Antarctic",
+     "chains": [
+      "Arbitrum"
+     ],
+     "site": "antarctic.exchange",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 22,
+     "name": "Moonlander",
+     "chains": [
+      "Cronos",
+      "Cronos zkEVM"
+     ],
+     "site": "moonlander.trade",
+     "tvlUsdM": 8,
+     "live": false
+    },
+    {
+     "rank": 23,
+     "name": "BULK",
+     "chains": [
+      "Solana"
+     ],
+     "site": "bulk.trade",
+     "tvlUsdM": 7,
+     "live": true
+    },
+    {
+     "rank": 24,
+     "name": "dYdX V3",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "dydx.trade",
+     "tvlUsdM": 7,
+     "live": false
+    },
+    {
+     "rank": 25,
+     "name": "HertzFlow",
+     "chains": [
+      "Binance"
+     ],
+     "site": "hertzflow.xyz",
+     "tvlUsdM": 7,
+     "live": true
+    },
+    {
+     "rank": 26,
+     "name": "Gains Network",
+     "chains": [
+      "Arbitrum",
+      "Base",
+      "Polygon"
+     ],
+     "site": "gains.trade",
+     "tvlUsdM": 7,
+     "live": false
+    },
+    {
+     "rank": 27,
+     "name": "TurboFlow Perps",
+     "chains": [
+      "Binance",
+      "Solana"
+     ],
+     "site": "tf.xyz",
+     "tvlUsdM": 7,
+     "live": false
+    },
+    {
+     "rank": 28,
+     "name": "Hakka Finance",
+     "chains": [
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "hakka.finance",
+     "tvlUsdM": 5,
+     "live": false
+    },
+    {
+     "rank": 29,
+     "name": "Fulcrom Perps",
+     "chains": [
+      "Cronos",
+      "zkSync Era",
+      "Cronos zkEVM"
+     ],
+     "site": "fulcrom.finance",
+     "tvlUsdM": 5,
+     "live": false
+    },
+    {
+     "rank": 30,
+     "name": "Bumpin Trade",
+     "chains": [
+      "Solana"
+     ],
+     "site": "bumpin.trade",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 31,
+     "name": "Injective Perps",
+     "chains": [
+      "Injective"
+     ],
+     "site": "injective.com",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 32,
+     "name": "Storm Trade",
+     "chains": [
+      "TON"
+     ],
+     "site": "storm.tg",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 33,
+     "name": "Evedex",
+     "chains": [
+      "Arbitrum",
+      "Eventum"
+     ],
+     "site": "invite.evedex.com",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 34,
+     "name": "AlphaX",
+     "chains": [
+      "Binance",
+      "Ethereum",
+      "Arbitrum"
+     ],
+     "site": "alphax.com",
+     "tvlUsdM": 3,
+     "live": false
+    },
+    {
+     "rank": 35,
+     "name": "Perpl",
+     "chains": [
+      "Monad"
+     ],
+     "site": "perpl.xyz",
+     "tvlUsdM": 3,
+     "live": false
+    },
+    {
+     "rank": 36,
+     "name": "GMX V1 EVM",
+     "chains": [
+      "Avalanche",
+      "Arbitrum"
+     ],
+     "site": "gmx.io",
+     "tvlUsdM": 3,
+     "live": false
+    },
+    {
+     "rank": 37,
+     "name": "Ostium",
+     "chains": [
+      "Arbitrum"
+     ],
+     "site": "ostium.io",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 38,
+     "name": "Meridian Perps",
+     "chains": [
+      "Robinhood Chain"
+     ],
+     "site": "app.meridian.xyz",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 39,
+     "name": "Strike Finance Perpetuals",
+     "chains": [
+      "Cardano",
+      "Ethereum"
+     ],
+     "site": "strikefinance.org",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 40,
+     "name": "SynFutures V3",
+     "chains": [
+      "Base",
+      "Blast"
+     ],
+     "site": "trade.synfutures.com",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 41,
+     "name": "LeverUp",
+     "chains": [
+      "Monad"
+     ],
+     "site": "app.leverup.xyz",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 42,
+     "name": "DipCoin Perps",
+     "chains": [
+      "Sui"
+     ],
+     "site": "dipcoin.io",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 43,
+     "name": "AnyHedge",
+     "chains": [
+      "Bitcoincash"
+     ],
+     "site": "anyhedge.com",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 44,
+     "name": "SYMMIO",
+     "chains": [
+      "Base",
+      "Berachain",
+      "Arbitrum"
+     ],
+     "site": "symm.io",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 45,
+     "name": "ELFi Protocol",
+     "chains": [
+      "Base",
+      "Arbitrum"
+     ],
+     "site": "",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 46,
+     "name": "Bluefin Pro",
+     "chains": [
+      "Sui"
+     ],
+     "site": "bluefin.io",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 47,
+     "name": "KiloEx",
+     "chains": [
+      "Binance",
+      "Op_Bnb",
+      "Base"
+     ],
+     "site": "app.kiloex.io",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 48,
+     "name": "Katana Perps",
+     "chains": [
+      "Katana"
+     ],
+     "site": "perps.katana.network",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 49,
+     "name": "BMX Freestyle",
+     "chains": [
+      "Base",
+      "Mode"
+     ],
+     "site": "bmx.trade",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 50,
+     "name": "ApeX Pro",
+     "chains": [
+      "Ethereum",
+      "Polygon",
+      "Arbitrum"
+     ],
+     "site": "apex.exchange",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 51,
+     "name": "Strat Perps",
+     "chains": [
+      "Strat"
+     ],
+     "site": "app.strat.trade",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 52,
+     "name": "Synthetix V4",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "synthetix.io",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 53,
+     "name": "Parcl V3",
+     "chains": [
+      "Solana"
+     ],
+     "site": "parcl.co",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 54,
+     "name": "Sudo Perps",
+     "chains": [
+      "Sui"
+     ],
+     "site": "sudo.finance",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 55,
+     "name": "Drift Trade",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.drift.trade",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 56,
+     "name": "DerivaDEX",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "derivadex.com",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 57,
+     "name": "Monday Trade Perps",
+     "chains": [
+      "Monad"
+     ],
+     "site": "app.monday.trade",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 58,
+     "name": "Opyn Squeeth",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 59,
+     "name": "Bounce.Tech",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "bounce.tech",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 60,
+     "name": "Lavarage",
+     "chains": [
+      "Solana"
+     ],
+     "site": "lavarage.xyz",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 61,
+     "name": "IPOR Derivatives",
+     "chains": [
+      "Arbitrum",
+      "Ethereum",
+      "Base"
+     ],
+     "site": "app.ipor.io",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 62,
+     "name": "WaterX",
+     "chains": [
+      "Sui"
+     ],
+     "site": "waterx.app",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 63,
+     "name": "RollX",
+     "chains": [
+      "Base",
+      "Bitlayer"
+     ],
+     "site": "rollx.trade",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 64,
+     "name": "Perpetual Protocol",
+     "chains": [
+      "Ethereum",
+      "Optimism"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 65,
+     "name": "Wasabi Perps",
+     "chains": [
+      "Base",
+      "Solana",
+      "Ethereum"
+     ],
+     "site": "app.wasabi.xyz",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 66,
+     "name": "Flamix",
+     "chains": [
+      "Flare"
+     ],
+     "site": "app.flamix.trade",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 67,
+     "name": "PHAME Protocol",
+     "chains": [
+      "Pulse"
+     ],
+     "site": "dapp.phame.io",
+     "tvlUsdM": 0,
+     "live": false
+    }
+   ]
+  },
+  {
+   "id": "lending",
+   "label": "Lending",
+   "defillamaCategory": "Lending",
+   "items": [
+    {
+     "rank": 1,
+     "name": "Aave V3",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Arbitrum"
+     ],
+     "site": "aave.com",
+     "tvlUsdM": 15843,
+     "live": false
+    },
+    {
+     "rank": 2,
+     "name": "Morpho Blue",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Robinhood Chain"
+     ],
+     "site": "app.morpho.org",
+     "tvlUsdM": 10838,
+     "live": false
+    },
+    {
+     "rank": 3,
+     "name": "SparkLend",
+     "chains": [
+      "Ethereum",
+      "xDai"
+     ],
+     "site": "spark.finance",
+     "tvlUsdM": 5040,
+     "live": false
+    },
+    {
+     "rank": 4,
+     "name": "JustLend V1",
+     "chains": [
+      "Tron"
+     ],
+     "site": "justlend.org",
+     "tvlUsdM": 3416,
+     "live": false
+    },
+    {
+     "rank": 5,
+     "name": "Maple",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Ripple"
+     ],
+     "site": "maple.finance",
+     "tvlUsdM": 2464,
+     "live": false
+    },
+    {
+     "rank": 6,
+     "name": "Hyperliquid Earn",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "app.hyperliquid.xyz",
+     "tvlUsdM": 1549,
+     "live": false
+    },
+    {
+     "rank": 7,
+     "name": "Compound V3",
+     "chains": [
+      "Ethereum",
+      "Arbitrum",
+      "Base"
+     ],
+     "site": "compound.xyz",
+     "tvlUsdM": 1256,
+     "live": false
+    },
+    {
+     "rank": 8,
+     "name": "Kamino Lend",
+     "chains": [
+      "Solana"
+     ],
+     "site": "kamino.com",
+     "tvlUsdM": 1185,
+     "live": false
+    },
+    {
+     "rank": 9,
+     "name": "Venus Core Pool",
+     "chains": [
+      "Binance",
+      "Ethereum",
+      "Arbitrum"
+     ],
+     "site": "app.venus.io",
+     "tvlUsdM": 1077,
+     "live": false
+    },
+    {
+     "rank": 10,
+     "name": "Jupiter Lend",
+     "chains": [
+      "Solana"
+     ],
+     "site": "jup.ag",
+     "tvlUsdM": 932,
+     "live": false
+    },
+    {
+     "rank": 11,
+     "name": "Lista Lending",
+     "chains": [
+      "Binance",
+      "Ethereum"
+     ],
+     "site": "lista.org",
+     "tvlUsdM": 911,
+     "live": false
+    },
+    {
+     "rank": 12,
+     "name": "Aave V4",
+     "chains": [
+      "Ethereum",
+      "Arc",
+      "Avalanche"
+     ],
+     "site": "aave.com",
+     "tvlUsdM": 807,
+     "live": false
+    },
+    {
+     "rank": 13,
+     "name": "Fluid Lending",
+     "chains": [
+      "Ethereum",
+      "Arbitrum",
+      "Plasma"
+     ],
+     "site": "fluid.io",
+     "tvlUsdM": 619,
+     "live": false
+    },
+    {
+     "rank": 14,
+     "name": "HyperLend Pooled",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "app.hyperlend.finance",
+     "tvlUsdM": 310,
+     "live": false
+    },
+    {
+     "rank": 15,
+     "name": "EtherFi Borrowing Market",
+     "chains": [
+      "Optimism",
+      "Scroll"
+     ],
+     "site": "ether.fi",
+     "tvlUsdM": 301,
+     "live": false
+    },
+    {
+     "rank": 16,
+     "name": "Euler V2",
+     "chains": [
+      "Monad",
+      "Ethereum",
+      "Base"
+     ],
+     "site": "euler.finance",
+     "tvlUsdM": 283,
+     "live": false
+    },
+    {
+     "rank": 17,
+     "name": "Aave Horizon RWA",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "app.aave.com",
+     "tvlUsdM": 219,
+     "live": false
+    },
+    {
+     "rank": 18,
+     "name": "Cooler Loans",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "app.olympusdao.finance",
+     "tvlUsdM": 203,
+     "live": false
+    },
+    {
+     "rank": 19,
+     "name": "cap",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "cap.app",
+     "tvlUsdM": 182,
+     "live": false
+    },
+    {
+     "rank": 20,
+     "name": "Figure Markets Prime",
+     "chains": [
+      "Provenance"
+     ],
+     "site": "figure.com",
+     "tvlUsdM": 162,
+     "live": false
+    },
+    {
+     "rank": 21,
+     "name": "Morpho Midnight",
+     "chains": [
+      "Ethereum",
+      "Base"
+     ],
+     "site": "app.morpho.org",
+     "tvlUsdM": 161,
+     "live": false
+    },
+    {
+     "rank": 22,
+     "name": "Rhea Lend",
+     "chains": [
+      "Near"
+     ],
+     "site": "lending.rhea.finance",
+     "tvlUsdM": 151,
+     "live": false
+    },
+    {
+     "rank": 23,
+     "name": "Dolomite",
+     "chains": [
+      "Ethereum",
+      "Arbitrum",
+      "Berachain"
+     ],
+     "site": "dolomite.io",
+     "tvlUsdM": 142,
+     "live": false
+    },
+    {
+     "rank": 24,
+     "name": "Suilend",
+     "chains": [
+      "Sui"
+     ],
+     "site": "suilend.fi",
+     "tvlUsdM": 139,
+     "live": false
+    },
+    {
+     "rank": 25,
+     "name": "Curvance",
+     "chains": [
+      "Monad"
+     ],
+     "site": "app.curvance.com",
+     "tvlUsdM": 135,
+     "live": false
+    },
+    {
+     "rank": 26,
+     "name": "NAVI Lending",
+     "chains": [
+      "Sui"
+     ],
+     "site": "naviprotocol.io",
+     "tvlUsdM": 126,
+     "live": false
+    },
+    {
+     "rank": 27,
+     "name": "Blend Pools V2",
+     "chains": [
+      "Stellar"
+     ],
+     "site": "blend.capital",
+     "tvlUsdM": 119,
+     "live": false
+    },
+    {
+     "rank": 28,
+     "name": "Tydro",
+     "chains": [
+      "Ink"
+     ],
+     "site": "tydro.com",
+     "tvlUsdM": 118,
+     "live": false
+    },
+    {
+     "rank": 29,
+     "name": "Benqi Lending",
+     "chains": [
+      "Avalanche"
+     ],
+     "site": "benqi.fi",
+     "tvlUsdM": 100,
+     "live": false
+    },
+    {
+     "rank": 30,
+     "name": "Aave V2",
+     "chains": [
+      "Ethereum",
+      "Polygon",
+      "Avalanche"
+     ],
+     "site": "aave.com",
+     "tvlUsdM": 99,
+     "live": false
+    },
+    {
+     "rank": 31,
+     "name": "Curve LlamaLend",
+     "chains": [
+      "Ethereum",
+      "Arbitrum",
+      "Fraxtal"
+     ],
+     "site": "curve.finance",
+     "tvlUsdM": 96,
+     "live": false
+    },
+    {
+     "rank": 32,
+     "name": "Compound V2",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "compound.xyz",
+     "tvlUsdM": 95,
+     "live": false
+    },
+    {
+     "rank": 33,
+     "name": "Loopscale Lending",
+     "chains": [
+      "Solana"
+     ],
+     "site": "loop.sl",
+     "tvlUsdM": 82,
+     "live": false
+    },
+    {
+     "rank": 34,
+     "name": "Save",
+     "chains": [
+      "Solana",
+      "Eclipse"
+     ],
+     "site": "save.finance",
+     "tvlUsdM": 72,
+     "live": false
+    },
+    {
+     "rank": 35,
+     "name": "Project 0",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.0.xyz",
+     "tvlUsdM": 54,
+     "live": false
+    },
+    {
+     "rank": 36,
+     "name": "Current",
+     "chains": [
+      "Sui"
+     ],
+     "site": "current.finance",
+     "tvlUsdM": 54,
+     "live": false
+    },
+    {
+     "rank": 37,
+     "name": "Resupply",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "resupply.fi",
+     "tvlUsdM": 48,
+     "live": false
+    },
+    {
+     "rank": 38,
+     "name": "Zest V2",
+     "chains": [
+      "Stacks"
+     ],
+     "site": "zestprotocol.com",
+     "tvlUsdM": 44,
+     "live": false
+    },
+    {
+     "rank": 39,
+     "name": "Flux Finance",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "fluxfinance.com",
+     "tvlUsdM": 44,
+     "live": false
+    },
+    {
+     "rank": 40,
+     "name": "Curve LlamaLend V2",
+     "chains": [
+      "Ethereum",
+      "Optimism"
+     ],
+     "site": "curve.finance",
+     "tvlUsdM": 37,
+     "live": false
+    },
+    {
+     "rank": 41,
+     "name": "Vaulta REX",
+     "chains": [
+      "EOS"
+     ],
+     "site": "eosauthority.com",
+     "tvlUsdM": 33,
+     "live": false
+    },
+    {
+     "rank": 42,
+     "name": "Mystic Finance Lending",
+     "chains": [
+      "Flare",
+      "Citrea",
+      "Plume Mainnet"
+     ],
+     "site": "mysticfinance.xyz",
+     "tvlUsdM": 32,
+     "live": false
+    },
+    {
+     "rank": 43,
+     "name": "marginfi Lending",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 31,
+     "live": false
+    },
+    {
+     "rank": 44,
+     "name": "MetalX Lending",
+     "chains": [
+      "Proton"
+     ],
+     "site": "lending.metalx.com",
+     "tvlUsdM": 30,
+     "live": false
+    },
+    {
+     "rank": 45,
+     "name": "Kinetic",
+     "chains": [
+      "Flare"
+     ],
+     "site": "kinetic.market",
+     "tvlUsdM": 30,
+     "live": false
+    },
+    {
+     "rank": 46,
+     "name": "RealT RMM Marketplace V2",
+     "chains": [
+      "xDai"
+     ],
+     "site": "",
+     "tvlUsdM": 29,
+     "live": false
+    },
+    {
+     "rank": 47,
+     "name": "Templar Lending",
+     "chains": [
+      "Stellar",
+      "Ethereum",
+      "Bitcoin"
+     ],
+     "site": "templarfi.org",
+     "tvlUsdM": 29,
+     "live": false
+    },
+    {
+     "rank": 48,
+     "name": "Hydration Lending",
+     "chains": [
+      "HydraDX"
+     ],
+     "site": "hydration.net",
+     "tvlUsdM": 23,
+     "live": false
+    },
+    {
+     "rank": 49,
+     "name": "Folks Finance Lending",
+     "chains": [
+      "Algorand"
+     ],
+     "site": "folks.finance",
+     "tvlUsdM": 23,
+     "live": false
+    },
+    {
+     "rank": 50,
+     "name": "Gearbox",
+     "chains": [
+      "Ethereum",
+      "Etherlink",
+      "Monad"
+     ],
+     "site": "gearbox.finance",
+     "tvlUsdM": 22,
+     "live": false
+    },
+    {
+     "rank": 51,
+     "name": "RNT Lend",
+     "chains": [
+      "Polygon"
+     ],
+     "site": "lend.rnt.finance",
+     "tvlUsdM": 21,
+     "live": false
+    },
+    {
+     "rank": 52,
+     "name": "Fraxlend",
+     "chains": [
+      "Ethereum",
+      "Fraxtal",
+      "Arbitrum"
+     ],
+     "site": "frax.com",
+     "tvlUsdM": 21,
+     "live": false
+    },
+    {
+     "rank": 53,
+     "name": "Native Credit Pool",
+     "chains": [
+      "Morph",
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "native.org",
+     "tvlUsdM": 21,
+     "live": false
+    },
+    {
+     "rank": 54,
+     "name": "Tectonic",
+     "chains": [
+      "Cronos"
+     ],
+     "site": "tectonic.finance",
+     "tvlUsdM": 18,
+     "live": false
+    },
+    {
+     "rank": 55,
+     "name": "Fira",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "fira.money",
+     "tvlUsdM": 18,
+     "live": false
+    },
+    {
+     "rank": 56,
+     "name": "Alpaca Finance 2.0",
+     "chains": [
+      "Binance"
+     ],
+     "site": "",
+     "tvlUsdM": 12,
+     "live": false
+    },
+    {
+     "rank": 57,
+     "name": "Exactly",
+     "chains": [
+      "Base",
+      "Optimism",
+      "Ethereum"
+     ],
+     "site": "exact.ly",
+     "tvlUsdM": 12,
+     "live": false
+    },
+    {
+     "rank": 58,
+     "name": "Flying Tulip Lend",
+     "chains": [
+      "Ethereum",
+      "Sonic",
+      "Binance"
+     ],
+     "site": "flyingtulip.com",
+     "tvlUsdM": 11,
+     "live": false
+    },
+    {
+     "rank": 59,
+     "name": "Vesu",
+     "chains": [
+      "Starknet"
+     ],
+     "site": "vesu.xyz",
+     "tvlUsdM": 10,
+     "live": false
+    },
+    {
+     "rank": 60,
+     "name": "BEND",
+     "chains": [
+      "Berachain"
+     ],
+     "site": "bend.berachain.com",
+     "tvlUsdM": 10,
+     "live": false
+    },
+    {
+     "rank": 61,
+     "name": "BiFi",
+     "chains": [
+      "Bifrost Network",
+      "Binance",
+      "Ethereum"
+     ],
+     "site": "bifi.finance",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 62,
+     "name": "Vena Finance",
+     "chains": [
+      "Fluent"
+     ],
+     "site": "vena.finance",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 63,
+     "name": "Scallop Lend",
+     "chains": [
+      "Sui"
+     ],
+     "site": "app.scallop.io",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 64,
+     "name": "Liqwid",
+     "chains": [
+      "Cardano"
+     ],
+     "site": "v2.liqwid.finance",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 65,
+     "name": "Moonwell Lending",
+     "chains": [
+      "Base",
+      "Ethereum",
+      "Optimism"
+     ],
+     "site": "moonwell.fi",
+     "tvlUsdM": 8,
+     "live": false
+    },
+    {
+     "rank": 66,
+     "name": "Kava Lend",
+     "chains": [
+      "Kava"
+     ],
+     "site": "app.kava.io",
+     "tvlUsdM": 8,
+     "live": false
+    },
+    {
+     "rank": 67,
+     "name": "Capyfi",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "LaChain Network"
+     ],
+     "site": "capyfi.com",
+     "tvlUsdM": 7,
+     "live": false
+    }
+   ]
+  },
+  {
+   "id": "dex",
+   "label": "Spot DEXs",
+   "defillamaCategory": "Dexs",
+   "items": [
+    {
+     "rank": 1,
+     "name": "Uniswap V3",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Arbitrum"
+     ],
+     "site": "app.uniswap.org",
+     "tvlUsdM": 1521,
+     "live": false
+    },
+    {
+     "rank": 2,
+     "name": "PancakeSwap AMM",
+     "chains": [
+      "Binance",
+      "Ethereum",
+      "Aptos"
+     ],
+     "site": "pancakeswap.finance",
+     "tvlUsdM": 1454,
+     "live": false
+    },
+    {
+     "rank": 3,
+     "name": "Uniswap V4",
+     "chains": [
+      "Ethereum",
+      "Robinhood Chain",
+      "Base"
+     ],
+     "site": "app.uniswap.org",
+     "tvlUsdM": 1181,
+     "live": false
+    },
+    {
+     "rank": 4,
+     "name": "Curve DEX",
+     "chains": [
+      "Ethereum",
+      "Fraxtal",
+      "Etherlink"
+     ],
+     "site": "curve.finance",
+     "tvlUsdM": 1082,
+     "live": false
+    },
+    {
+     "rank": 5,
+     "name": "Raydium AMM",
+     "chains": [
+      "Solana"
+     ],
+     "site": "raydium.io",
+     "tvlUsdM": 1018,
+     "live": false
+    },
+    {
+     "rank": 6,
+     "name": "Uniswap V2",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Polygon"
+     ],
+     "site": "app.uniswap.org",
+     "tvlUsdM": 870,
+     "live": false
+    },
+    {
+     "rank": 7,
+     "name": "PancakeSwap AMM V3",
+     "chains": [
+      "Binance",
+      "Ethereum",
+      "Base"
+     ],
+     "site": "pancakeswap.finance",
+     "tvlUsdM": 683,
+     "live": false
+    },
+    {
+     "rank": 8,
+     "name": "Bittensor dTAO",
+     "chains": [
+      "Bittensor"
+     ],
+     "site": "bittensor.com",
+     "tvlUsdM": 400,
+     "live": false
+    },
+    {
+     "rank": 9,
+     "name": "RocketSwap Anubis V2",
+     "chains": [
+      "Anubis"
+     ],
+     "site": "",
+     "tvlUsdM": 338,
+     "live": false
+    },
+    {
+     "rank": 10,
+     "name": "PumpSwap",
+     "chains": [
+      "Solana"
+     ],
+     "site": "swap.pump.fun",
+     "tvlUsdM": 311,
+     "live": false
+    },
+    {
+     "rank": 11,
+     "name": "Orca DEX",
+     "chains": [
+      "Solana",
+      "Eclipse"
+     ],
+     "site": "orca.so",
+     "tvlUsdM": 286,
+     "live": false
+    },
+    {
+     "rank": 12,
+     "name": "SUNSwap V2",
+     "chains": [
+      "Tron"
+     ],
+     "site": "sunswap.com",
+     "tvlUsdM": 253,
+     "live": false
+    },
+    {
+     "rank": 13,
+     "name": "Fluid DEX",
+     "chains": [
+      "Ethereum",
+      "Arbitrum",
+      "Base"
+     ],
+     "site": "fluid.io",
+     "tvlUsdM": 216,
+     "live": false
+    },
+    {
+     "rank": 14,
+     "name": "Sanctum Infinity",
+     "chains": [
+      "Solana"
+     ],
+     "site": "sanctum.so",
+     "tvlUsdM": 169,
+     "live": false
+    },
+    {
+     "rank": 15,
+     "name": "SUNSwap V3",
+     "chains": [
+      "Tron"
+     ],
+     "site": "sunswap.com",
+     "tvlUsdM": 156,
+     "live": false
+    },
+    {
+     "rank": 16,
+     "name": "Hyperliquid Spot Orderbook",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "app.hyperliquid.xyz",
+     "tvlUsdM": 147,
+     "live": false
+    },
+    {
+     "rank": 17,
+     "name": "Aero Slipstream",
+     "chains": [
+      "Base",
+      "Ethereum",
+      "Optimism"
+     ],
+     "site": "aero.xyz",
+     "tvlUsdM": 143,
+     "live": false
+    },
+    {
+     "rank": 18,
+     "name": "Meteora DLMM",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.meteora.ag",
+     "tvlUsdM": 142,
+     "live": false
+    },
+    {
+     "rank": 19,
+     "name": "SunSwap V4",
+     "chains": [
+      "Tron"
+     ],
+     "site": "sun.io",
+     "tvlUsdM": 132,
+     "live": false
+    },
+    {
+     "rank": 20,
+     "name": "Aerodrome Slipstream",
+     "chains": [
+      "Base"
+     ],
+     "site": "aerodrome.finance",
+     "tvlUsdM": 75,
+     "live": false
+    },
+    {
+     "rank": 21,
+     "name": "PancakeSwap Infinity",
+     "chains": [
+      "Binance",
+      "Base",
+      "Robinhood Chain"
+     ],
+     "site": "pancakeswap.finance",
+     "tvlUsdM": 72,
+     "live": false
+    },
+    {
+     "rank": 22,
+     "name": "VVS Standard",
+     "chains": [
+      "Cronos"
+     ],
+     "site": "vvs.finance",
+     "tvlUsdM": 72,
+     "live": false
+    },
+    {
+     "rank": 23,
+     "name": "THORChain DEX",
+     "chains": [
+      "Thorchain",
+      "Bitcoin",
+      "Ethereum"
+     ],
+     "site": "thorchain.org",
+     "tvlUsdM": 61,
+     "live": false
+    },
+    {
+     "rank": 24,
+     "name": "Aero Basic",
+     "chains": [
+      "Base",
+      "Optimism",
+      "Robinhood Chain"
+     ],
+     "site": "aero.xyz",
+     "tvlUsdM": 59,
+     "live": false
+    },
+    {
+     "rank": 25,
+     "name": "Nado Spot",
+     "chains": [
+      "Ink"
+     ],
+     "site": "app.nado.xyz",
+     "tvlUsdM": 54,
+     "live": false
+    },
+    {
+     "rank": 26,
+     "name": "Aerodrome V1",
+     "chains": [
+      "Base"
+     ],
+     "site": "aerodrome.finance",
+     "tvlUsdM": 52,
+     "live": false
+    },
+    {
+     "rank": 27,
+     "name": "SUNSwap V1",
+     "chains": [
+      "Tron"
+     ],
+     "site": "sunswap.com",
+     "tvlUsdM": 49,
+     "live": false
+    },
+    {
+     "rank": 28,
+     "name": "Meteora DAMM V1",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.meteora.ag",
+     "tvlUsdM": 45,
+     "live": false
+    },
+    {
+     "rank": 29,
+     "name": "Quickswap Dex",
+     "chains": [
+      "Polygon",
+      "Base"
+     ],
+     "site": "quickswap.exchange",
+     "tvlUsdM": 44,
+     "live": false
+    },
+    {
+     "rank": 30,
+     "name": "SushiSwap V3",
+     "chains": [
+      "Ethereum",
+      "Katana",
+      "Robinhood Chain"
+     ],
+     "site": "sushi.com",
+     "tvlUsdM": 40,
+     "live": false
+    },
+    {
+     "rank": 31,
+     "name": "Aquarius Stellar",
+     "chains": [
+      "Stellar"
+     ],
+     "site": "aqua.network",
+     "tvlUsdM": 38,
+     "live": false
+    },
+    {
+     "rank": 32,
+     "name": "SushiSwap",
+     "chains": [
+      "Ethereum",
+      "Polygon",
+      "Arbitrum"
+     ],
+     "site": "sushi.com",
+     "tvlUsdM": 35,
+     "live": false
+    },
+    {
+     "rank": 33,
+     "name": "Project X",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "prjx.com",
+     "tvlUsdM": 35,
+     "live": false
+    },
+    {
+     "rank": 34,
+     "name": "IDEX V1",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 35,
+     "live": false
+    },
+    {
+     "rank": 35,
+     "name": "XRPL DEX",
+     "chains": [
+      "Ripple"
+     ],
+     "site": "xrpl.org",
+     "tvlUsdM": 31,
+     "live": false
+    },
+    {
+     "rank": 36,
+     "name": "BDEX V3",
+     "chains": [
+      "BOT Chain"
+     ],
+     "site": "dex.botchain.ai",
+     "tvlUsdM": 31,
+     "live": false
+    },
+    {
+     "rank": 37,
+     "name": "nest CL",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "app.usenest.xyz",
+     "tvlUsdM": 30,
+     "live": false
+    },
+    {
+     "rank": 38,
+     "name": "Lista DEX",
+     "chains": [
+      "Binance",
+      "Ethereum"
+     ],
+     "site": "lista.org",
+     "tvlUsdM": 29,
+     "live": false
+    },
+    {
+     "rank": 39,
+     "name": "Pharaoh V3",
+     "chains": [
+      "Avalanche"
+     ],
+     "site": "phar.gg",
+     "tvlUsdM": 27,
+     "live": false
+    },
+    {
+     "rank": 40,
+     "name": "Ekubo",
+     "chains": [
+      "Starknet",
+      "Ethereum",
+      "Robinhood Chain"
+     ],
+     "site": "ekubo.org",
+     "tvlUsdM": 27,
+     "live": false
+    },
+    {
+     "rank": 41,
+     "name": "Cetus CLMM",
+     "chains": [
+      "Sui",
+      "Aptos"
+     ],
+     "site": "cetus.zone",
+     "tvlUsdM": 25,
+     "live": false
+    },
+    {
+     "rank": 42,
+     "name": "Jupiter Lend DEX",
+     "chains": [
+      "Solana"
+     ],
+     "site": "jup.ag",
+     "tvlUsdM": 24,
+     "live": false
+    },
+    {
+     "rank": 43,
+     "name": "Hydration DEX",
+     "chains": [
+      "HydraDX"
+     ],
+     "site": "hydration.net",
+     "tvlUsdM": 24,
+     "live": false
+    },
+    {
+     "rank": 44,
+     "name": "Rhea Dex",
+     "chains": [
+      "Near"
+     ],
+     "site": "dex.rhea.finance",
+     "tvlUsdM": 23,
+     "live": false
+    },
+    {
+     "rank": 45,
+     "name": "PulseX V1",
+     "chains": [
+      "Pulse"
+     ],
+     "site": "app.pulsex.com",
+     "tvlUsdM": 23,
+     "live": false
+    },
+    {
+     "rank": 46,
+     "name": "Fables",
+     "chains": [
+      "Robinhood Chain"
+     ],
+     "site": "fables.fi",
+     "tvlUsdM": 22,
+     "live": false
+    },
+    {
+     "rank": 47,
+     "name": "STON.fi",
+     "chains": [
+      "TON"
+     ],
+     "site": "app.ston.fi",
+     "tvlUsdM": 21,
+     "live": false
+    },
+    {
+     "rank": 48,
+     "name": "BisonFi",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 21,
+     "live": false
+    },
+    {
+     "rank": 49,
+     "name": "Meteora DAMM V2",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.meteora.ag",
+     "tvlUsdM": 19,
+     "live": false
+    },
+    {
+     "rank": 50,
+     "name": "Metric V1",
+     "chains": [
+      "Ethereum",
+      "Binance",
+      "Robinhood Chain"
+     ],
+     "site": "metric.xyz",
+     "tvlUsdM": 19,
+     "live": false
+    },
+    {
+     "rank": 51,
+     "name": "Tempo Stablecoin Dex",
+     "chains": [
+      "Tempo"
+     ],
+     "site": "tempo.xyz",
+     "tvlUsdM": 17,
+     "live": false
+    },
+    {
+     "rank": 52,
+     "name": "Balancer V2",
+     "chains": [
+      "Ethereum",
+      "Polygon",
+      "Arbitrum"
+     ],
+     "site": "balancer.fi",
+     "tvlUsdM": 17,
+     "live": false
+    },
+    {
+     "rank": 53,
+     "name": "Quickswap V3",
+     "chains": [
+      "Immutable zkEVM",
+      "Polygon",
+      "Manta"
+     ],
+     "site": "quickswap.exchange",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 54,
+     "name": "Agni Finance",
+     "chains": [
+      "Mantle"
+     ],
+     "site": "agni.finance",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 55,
+     "name": "Serum",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 56,
+     "name": "Sushi Stellar",
+     "chains": [
+      "Stellar"
+     ],
+     "site": "sushi.com",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 57,
+     "name": "CommunityV3",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 15,
+     "live": false
+    },
+    {
+     "rank": 58,
+     "name": "Bancor V3",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "app.bancor.network",
+     "tvlUsdM": 14,
+     "live": false
+    },
+    {
+     "rank": 59,
+     "name": "Stellar DEX",
+     "chains": [
+      "Stellar"
+     ],
+     "site": "developers.stellar.org",
+     "tvlUsdM": 14,
+     "live": false
+    },
+    {
+     "rank": 60,
+     "name": "SaucerSwap V2",
+     "chains": [
+      "Hedera"
+     ],
+     "site": "saucerswap.finance",
+     "tvlUsdM": 14,
+     "live": false
+    },
+    {
+     "rank": 61,
+     "name": "Futarchy AMM",
+     "chains": [
+      "Solana"
+     ],
+     "site": "metadao.fi",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 62,
+     "name": "SparkDEX V4",
+     "chains": [
+      "Flare"
+     ],
+     "site": "sparkdex.ai",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 63,
+     "name": "DODO AMM",
+     "chains": [
+      "Binance",
+      "Ethereum",
+      "Polygon"
+     ],
+     "site": "dodoex.io",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 64,
+     "name": "Minswap DEX",
+     "chains": [
+      "Cardano"
+     ],
+     "site": "minswap.org",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 65,
+     "name": "PulseX V2",
+     "chains": [
+      "Pulse"
+     ],
+     "site": "app.pulsex.com",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 66,
+     "name": "Balancer V3",
+     "chains": [
+      "Ethereum",
+      "Monad",
+      "Hyperliquid L1"
+     ],
+     "site": "balancer.fi",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 67,
+     "name": "FstSwap",
+     "chains": [
+      "Binance"
+     ],
+     "site": "",
+     "tvlUsdM": 13,
+     "live": false
+    }
+   ]
+  },
+  {
+   "id": "staking",
+   "label": "Liquid staking",
+   "defillamaCategory": "Liquid Staking",
+   "items": [
+    {
+     "rank": 1,
+     "name": "Lido",
+     "chains": [
+      "Ethereum",
+      "Solana",
+      "Terra"
+     ],
+     "site": "lido.fi",
+     "tvlUsdM": 21776,
+     "live": false
+    },
+    {
+     "rank": 2,
+     "name": "Binance staked ETH",
+     "chains": [
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "binance.com",
+     "tvlUsdM": 8698,
+     "live": false
+    },
+    {
+     "rank": 3,
+     "name": "ether.fi Stake",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Arbitrum"
+     ],
+     "site": "ether.fi",
+     "tvlUsdM": 4253,
+     "live": false
+    },
+    {
+     "rank": 4,
+     "name": "JustLend sTRX",
+     "chains": [
+      "Tron"
+     ],
+     "site": "app.justlend.org",
+     "tvlUsdM": 3139,
+     "live": false
+    },
+    {
+     "rank": 5,
+     "name": "Sanctum Validator LSTs",
+     "chains": [
+      "Solana"
+     ],
+     "site": "sanctum.so",
+     "tvlUsdM": 1593,
+     "live": false
+    },
+    {
+     "rank": 6,
+     "name": "Rocket Pool",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "rocketpool.net",
+     "tvlUsdM": 1090,
+     "live": false
+    },
+    {
+     "rank": 7,
+     "name": "Binance Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "binance.com",
+     "tvlUsdM": 978,
+     "live": false
+    },
+    {
+     "rank": 8,
+     "name": "Jito Liquid Staking",
+     "chains": [
+      "Solana"
+     ],
+     "site": "jito.network",
+     "tvlUsdM": 922,
+     "live": false
+    },
+    {
+     "rank": 9,
+     "name": "StakeWise V3",
+     "chains": [
+      "Ethereum",
+      "xDai"
+     ],
+     "site": "stakewise.io",
+     "tvlUsdM": 881,
+     "live": false
+    },
+    {
+     "rank": 10,
+     "name": "Kinetiq kHYPE",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "kinetiq.xyz",
+     "tvlUsdM": 831,
+     "live": false
+    },
+    {
+     "rank": 11,
+     "name": "Lista Liquid Staking",
+     "chains": [
+      "Binance"
+     ],
+     "site": "lista.org",
+     "tvlUsdM": 708,
+     "live": false
+    },
+    {
+     "rank": 12,
+     "name": "Liquid Collective",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "liquidcollective.io",
+     "tvlUsdM": 616,
+     "live": false
+    },
+    {
+     "rank": 13,
+     "name": "mETH Protocol",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "methprotocol.xyz",
+     "tvlUsdM": 524,
+     "live": false
+    },
+    {
+     "rank": 14,
+     "name": "Jupiter Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "jup.ag",
+     "tvlUsdM": 458,
+     "live": false
+    },
+    {
+     "rank": 15,
+     "name": "Coinbase Wrapped Staked ETH",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "coinbase.com",
+     "tvlUsdM": 446,
+     "live": false
+    },
+    {
+     "rank": 16,
+     "name": "Forward Industries SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "forwardindustries.com",
+     "tvlUsdM": 283,
+     "live": false
+    },
+    {
+     "rank": 17,
+     "name": "Drift Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.drift.trade",
+     "tvlUsdM": 252,
+     "live": false
+    },
+    {
+     "rank": 18,
+     "name": "Marinade Liquid Staking",
+     "chains": [
+      "Solana"
+     ],
+     "site": "marinade.finance",
+     "tvlUsdM": 204,
+     "live": false
+    },
+    {
+     "rank": 19,
+     "name": "Benqi Staked Avax",
+     "chains": [
+      "Avalanche"
+     ],
+     "site": "app.benqi.fi",
+     "tvlUsdM": 199,
+     "live": false
+    },
+    {
+     "rank": 20,
+     "name": "DFDV Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "defidevcorp.com",
+     "tvlUsdM": 192,
+     "live": false
+    },
+    {
+     "rank": 21,
+     "name": "Stader",
+     "chains": [
+      "Ethereum",
+      "Hedera",
+      "Fantom"
+     ],
+     "site": "staderlabs.com",
+     "tvlUsdM": 186,
+     "live": false
+    },
+    {
+     "rank": 22,
+     "name": "stHYPE",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "app.valantis.xyz",
+     "tvlUsdM": 182,
+     "live": false
+    },
+    {
+     "rank": 23,
+     "name": "Tonstakers LSD",
+     "chains": [
+      "TON"
+     ],
+     "site": "tonstakers.com",
+     "tvlUsdM": 163,
+     "live": false
+    },
+    {
+     "rank": 24,
+     "name": "Phantom SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "phantom.com",
+     "tvlUsdM": 147,
+     "live": false
+    },
+    {
+     "rank": 25,
+     "name": "Bybit Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "bybit.com",
+     "tvlUsdM": 133,
+     "live": false
+    },
+    {
+     "rank": 26,
+     "name": "The Vault Liquid Staking",
+     "chains": [
+      "Solana"
+     ],
+     "site": "thevault.finance",
+     "tvlUsdM": 118,
+     "live": false
+    },
+    {
+     "rank": 27,
+     "name": "JPool",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.jpool.one",
+     "tvlUsdM": 112,
+     "live": false
+    },
+    {
+     "rank": 28,
+     "name": "Frax Ether",
+     "chains": [
+      "Ethereum",
+      "Fraxtal"
+     ],
+     "site": "frax.com",
+     "tvlUsdM": 111,
+     "live": false
+    },
+    {
+     "rank": 29,
+     "name": "Phase Delegation",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 99,
+     "live": false
+    },
+    {
+     "rank": 30,
+     "name": "Helius Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "helius.dev",
+     "tvlUsdM": 87,
+     "live": false
+    },
+    {
+     "rank": 31,
+     "name": "Meta Pool Near",
+     "chains": [
+      "Near",
+      "Aurora"
+     ],
+     "site": "metapool.app",
+     "tvlUsdM": 81,
+     "live": false
+    },
+    {
+     "rank": 32,
+     "name": "stake.link liquid",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "stake.link",
+     "tvlUsdM": 80,
+     "live": false
+    },
+    {
+     "rank": 33,
+     "name": "BlazeStake",
+     "chains": [
+      "Solana"
+     ],
+     "site": "stake.solblaze.org",
+     "tvlUsdM": 78,
+     "live": false
+    },
+    {
+     "rank": 34,
+     "name": "StackingDAO",
+     "chains": [
+      "Stacks"
+     ],
+     "site": "app.stackingdao.com",
+     "tvlUsdM": 75,
+     "live": false
+    },
+    {
+     "rank": 35,
+     "name": "Valdora Finance",
+     "chains": [
+      "ZIGChain"
+     ],
+     "site": "valdora.finance",
+     "tvlUsdM": 75,
+     "live": false
+    },
+    {
+     "rank": 36,
+     "name": "RHEA LST",
+     "chains": [
+      "Near"
+     ],
+     "site": "rhea.finance",
+     "tvlUsdM": 70,
+     "live": false
+    },
+    {
+     "rank": 37,
+     "name": "JagPool Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "jagpool.xyz",
+     "tvlUsdM": 69,
+     "live": false
+    },
+    {
+     "rank": 38,
+     "name": "Gate SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.sanctum.so",
+     "tvlUsdM": 60,
+     "live": false
+    },
+    {
+     "rank": 39,
+     "name": "SpringSui",
+     "chains": [
+      "Sui"
+     ],
+     "site": "springsui.com",
+     "tvlUsdM": 58,
+     "live": false
+    },
+    {
+     "rank": 40,
+     "name": "Origin Ether",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Plume Mainnet"
+     ],
+     "site": "originprotocol.com",
+     "tvlUsdM": 53,
+     "live": false
+    },
+    {
+     "rank": 41,
+     "name": "STKESOL by SOL Strategies",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.solstrategies.io",
+     "tvlUsdM": 49,
+     "live": false
+    },
+    {
+     "rank": 42,
+     "name": "LiNEAR Protocol",
+     "chains": [
+      "Near"
+     ],
+     "site": "linearprotocol.org",
+     "tvlUsdM": 48,
+     "live": false
+    },
+    {
+     "rank": 43,
+     "name": "Kinetiq kmHYPE",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "markets.xyz",
+     "tvlUsdM": 39,
+     "live": false
+    },
+    {
+     "rank": 44,
+     "name": "Bitget SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "bitget.com",
+     "tvlUsdM": 35,
+     "live": false
+    },
+    {
+     "rank": 45,
+     "name": "NodeDAO",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "nodedao.com",
+     "tvlUsdM": 32,
+     "live": false
+    },
+    {
+     "rank": 46,
+     "name": "Haedal Protocol",
+     "chains": [
+      "Sui"
+     ],
+     "site": "haedal.xyz",
+     "tvlUsdM": 31,
+     "live": false
+    },
+    {
+     "rank": 47,
+     "name": "Veno Finance",
+     "chains": [
+      "Cronos",
+      "Ethereum",
+      "Cronos zkEVM"
+     ],
+     "site": "veno.finance",
+     "tvlUsdM": 30,
+     "live": false
+    },
+    {
+     "rank": 48,
+     "name": "Definity Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "definity.finance",
+     "tvlUsdM": 28,
+     "live": false
+    },
+    {
+     "rank": 49,
+     "name": "Crypto.com Liquid Staking",
+     "chains": [
+      "Cronos",
+      "Solana"
+     ],
+     "site": "crypto.com",
+     "tvlUsdM": 27,
+     "live": false
+    },
+    {
+     "rank": 50,
+     "name": "Swell Liquid Staking",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "app.swellnetwork.io",
+     "tvlUsdM": 25,
+     "live": false
+    },
+    {
+     "rank": 51,
+     "name": "xALGO Liquid Staking",
+     "chains": [
+      "Algorand"
+     ],
+     "site": "app.folks.finance",
+     "tvlUsdM": 25,
+     "live": false
+    },
+    {
+     "rank": 52,
+     "name": "Volo LST",
+     "chains": [
+      "Sui"
+     ],
+     "site": "volosui.com",
+     "tvlUsdM": 24,
+     "live": false
+    },
+    {
+     "rank": 53,
+     "name": "Ankr",
+     "chains": [
+      "Ethereum",
+      "Flow",
+      "Binance"
+     ],
+     "site": "ankr.com",
+     "tvlUsdM": 24,
+     "live": false
+    },
+    {
+     "rank": 54,
+     "name": "Stakee",
+     "chains": [
+      "TON"
+     ],
+     "site": "stakee.org",
+     "tvlUsdM": 24,
+     "live": false
+    },
+    {
+     "rank": 55,
+     "name": "Meta Pool ETH",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "metapool.app",
+     "tvlUsdM": 24,
+     "live": false
+    },
+    {
+     "rank": 56,
+     "name": "GLIF",
+     "chains": [
+      "Filecoin",
+      "Base"
+     ],
+     "site": "glif.io",
+     "tvlUsdM": 22,
+     "live": false
+    },
+    {
+     "rank": 57,
+     "name": "Hylo LSTs",
+     "chains": [
+      "Solana"
+     ],
+     "site": "hylo.so",
+     "tvlUsdM": 18,
+     "live": false
+    },
+    {
+     "rank": 58,
+     "name": "StakeStone STONE",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "stakestone.io",
+     "tvlUsdM": 17,
+     "live": false
+    },
+    {
+     "rank": 59,
+     "name": "GETH",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "guarda.com",
+     "tvlUsdM": 17,
+     "live": false
+    },
+    {
+     "rank": 60,
+     "name": "Japan Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "japansol.com",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 61,
+     "name": "Raiku Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "stake.raiku.com",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 62,
+     "name": "Hydro LST",
+     "chains": [
+      "Injective"
+     ],
+     "site": "app.hydroprotocol.finance",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 63,
+     "name": "Infrared Finance",
+     "chains": [
+      "Berachain"
+     ],
+     "site": "infrared.finance",
+     "tvlUsdM": 12,
+     "live": false
+    },
+    {
+     "rank": 64,
+     "name": "Hyperbeat LST",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "app.hyperbeat.org",
+     "tvlUsdM": 12,
+     "live": false
+    },
+    {
+     "rank": 65,
+     "name": "Sceptre Liquid",
+     "chains": [
+      "Flare"
+     ],
+     "site": "",
+     "tvlUsdM": 12,
+     "live": false
+    },
+    {
+     "rank": 66,
+     "name": "Hubra Staked SOL",
+     "chains": [
+      "Solana"
+     ],
+     "site": "hubra.app",
+     "tvlUsdM": 12,
+     "live": false
+    },
+    {
+     "rank": 67,
+     "name": "Bifrost Liquid Staking",
+     "chains": [
+      "Bifrost",
+      "Ethereum",
+      "Manta"
+     ],
+     "site": "app.bifrost.io",
+     "tvlUsdM": 11,
+     "live": false
+    }
+   ]
+  },
+  {
+   "id": "yield",
+   "label": "Yield",
+   "defillamaCategory": "Yield",
+   "items": [
+    {
+     "rank": 1,
+     "name": "Spark Savings",
+     "chains": [
+      "Ethereum",
+      "Arbitrum",
+      "X Layer"
+     ],
+     "site": "spark.finance",
+     "tvlUsdM": 1256,
+     "live": false
+    },
+    {
+     "rank": 2,
+     "name": "Pendle V2",
+     "chains": [
+      "Ethereum",
+      "Monad",
+      "Arbitrum"
+     ],
+     "site": "pendle.finance",
+     "tvlUsdM": 999,
+     "live": false
+    },
+    {
+     "rank": 3,
+     "name": "Convex Finance",
+     "chains": [
+      "Ethereum",
+      "Fraxtal",
+      "Arbitrum"
+     ],
+     "site": "convexfinance.com",
+     "tvlUsdM": 505,
+     "live": false
+    },
+    {
+     "rank": 4,
+     "name": "Avalon Superearn",
+     "chains": [
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "app.avalonfinance.xyz",
+     "tvlUsdM": 142,
+     "live": false
+    },
+    {
+     "rank": 5,
+     "name": "Stake DAO Yield",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Fraxtal"
+     ],
+     "site": "stakedao.org",
+     "tvlUsdM": 130,
+     "live": false
+    },
+    {
+     "rank": 6,
+     "name": "Lorenzo sUSD1+",
+     "chains": [
+      "Binance",
+      "Ethereum"
+     ],
+     "site": "lorenzo-protocol.xyz",
+     "tvlUsdM": 80,
+     "live": false
+    },
+    {
+     "rank": 7,
+     "name": "infiniFi",
+     "chains": [
+      "Ethereum",
+      "Monad",
+      "Base"
+     ],
+     "site": "infinifi.xyz",
+     "tvlUsdM": 73,
+     "live": false
+    },
+    {
+     "rank": 8,
+     "name": "Concentrator",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "concentrator.aladdin.club",
+     "tvlUsdM": 68,
+     "live": false
+    },
+    {
+     "rank": 9,
+     "name": "Wise Token",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "app.wisetoken.com",
+     "tvlUsdM": 64,
+     "live": false
+    },
+    {
+     "rank": 10,
+     "name": "Yuzu Money",
+     "chains": [
+      "Plasma",
+      "Monad",
+      "Ethereum"
+     ],
+     "site": "app.yuzu.money",
+     "tvlUsdM": 63,
+     "live": false
+    },
+    {
+     "rank": 11,
+     "name": "Aster asBNB",
+     "chains": [
+      "Binance"
+     ],
+     "site": "asterdex.com",
+     "tvlUsdM": 58,
+     "live": false
+    },
+    {
+     "rank": 12,
+     "name": "Sanctum Reserve",
+     "chains": [
+      "Solana"
+     ],
+     "site": "sanctum.so",
+     "tvlUsdM": 56,
+     "live": false
+    },
+    {
+     "rank": 13,
+     "name": "Exponent Yield Exchange",
+     "chains": [
+      "Solana"
+     ],
+     "site": "exponent.finance",
+     "tvlUsdM": 46,
+     "live": false
+    },
+    {
+     "rank": 14,
+     "name": "Noon",
+     "chains": [
+      "Ethereum",
+      "Sophon",
+      "zkSync Era"
+     ],
+     "site": "app.noon.capital",
+     "tvlUsdM": 38,
+     "live": false
+    },
+    {
+     "rank": 15,
+     "name": "sDAI",
+     "chains": [
+      "xDai"
+     ],
+     "site": "",
+     "tvlUsdM": 38,
+     "live": false
+    },
+    {
+     "rank": 16,
+     "name": "AUTOfinance",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Arbitrum"
+     ],
+     "site": "auto.finance",
+     "tvlUsdM": 37,
+     "live": false
+    },
+    {
+     "rank": 17,
+     "name": "Sierra Protocol",
+     "chains": [
+      "Ethereum",
+      "Avalanche",
+      "Plume Mainnet"
+     ],
+     "site": "sierra.money",
+     "tvlUsdM": 37,
+     "live": false
+    },
+    {
+     "rank": 18,
+     "name": "Zoo Finance",
+     "chains": [
+      "Binance",
+      "Story",
+      "Sei"
+     ],
+     "site": "zoofi.io",
+     "tvlUsdM": 28,
+     "live": false
+    },
+    {
+     "rank": 19,
+     "name": "RockSolid Network",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "rocksolid.network",
+     "tvlUsdM": 21,
+     "live": false
+    },
+    {
+     "rank": 20,
+     "name": "Strata Markets",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "strata.markets",
+     "tvlUsdM": 15,
+     "live": false
+    },
+    {
+     "rank": 21,
+     "name": "Exponent Risk Tranching",
+     "chains": [
+      "Solana"
+     ],
+     "site": "exponent.finance",
+     "tvlUsdM": 14,
+     "live": false
+    },
+    {
+     "rank": 22,
+     "name": "Belt Finance",
+     "chains": [
+      "Binance",
+      "Klaytn",
+      "Heco"
+     ],
+     "site": "belt.fi",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 23,
+     "name": "GrowiHF",
+     "chains": [
+      "Hyperliquid L1",
+      "Hibachi"
+     ],
+     "site": "hf.growi.fi",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 24,
+     "name": "Origin ARM",
+     "chains": [
+      "Ethereum",
+      "Sonic"
+     ],
+     "site": "originprotocol.com",
+     "tvlUsdM": 12,
+     "live": false
+    },
+    {
+     "rank": 25,
+     "name": "Spectra V2",
+     "chains": [
+      "Flare",
+      "Stellar",
+      "Ethereum"
+     ],
+     "site": "app.spectra.finance",
+     "tvlUsdM": 11,
+     "live": false
+    },
+    {
+     "rank": 26,
+     "name": "Equilibria",
+     "chains": [
+      "Ethereum",
+      "Binance",
+      "Arbitrum"
+     ],
+     "site": "equilibria.fi",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 27,
+     "name": "SuperEarn",
+     "chains": [
+      "Klaytn"
+     ],
+     "site": "superearn.io",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 28,
+     "name": "Aura",
+     "chains": [
+      "Ethereum",
+      "Base",
+      "Arbitrum"
+     ],
+     "site": "aura.finance",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 29,
+     "name": "Haedal Lending Vault",
+     "chains": [
+      "Sui"
+     ],
+     "site": "haedal.xyz",
+     "tvlUsdM": 7,
+     "live": false
+    },
+    {
+     "rank": 30,
+     "name": "Radpie",
+     "chains": [
+      "Arbitrum",
+      "Binance"
+     ],
+     "site": "radiant.magpiexyz.io",
+     "tvlUsdM": 7,
+     "live": false
+    },
+    {
+     "rank": 31,
+     "name": "Aftermath afLP",
+     "chains": [
+      "Sui"
+     ],
+     "site": "aftermath.finance",
+     "tvlUsdM": 7,
+     "live": false
+    },
+    {
+     "rank": 32,
+     "name": "Royco V2",
+     "chains": [
+      "Ethereum",
+      "Avalanche",
+      "Base"
+     ],
+     "site": "royco.org",
+     "tvlUsdM": 7,
+     "live": false
+    },
+    {
+     "rank": 33,
+     "name": "StableHodl",
+     "chains": [
+      "Polygon",
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "stablehodl.com",
+     "tvlUsdM": 6,
+     "live": false
+    },
+    {
+     "rank": 34,
+     "name": "NUVA",
+     "chains": [
+      "Ethereum",
+      "Provenance"
+     ],
+     "site": "nuva.finance",
+     "tvlUsdM": 6,
+     "live": false
+    },
+    {
+     "rank": 35,
+     "name": "Looped Hype",
+     "chains": [
+      "Hyperliquid L1"
+     ],
+     "site": "loopingcollective.org",
+     "tvlUsdM": 6,
+     "live": false
+    },
+    {
+     "rank": 36,
+     "name": "cVault Finance",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 6,
+     "live": false
+    },
+    {
+     "rank": 37,
+     "name": "Harmonix Finance",
+     "chains": [
+      "Hyperliquid L1",
+      "Arbitrum",
+      "Ethereum"
+     ],
+     "site": "app.harmonix.fi",
+     "tvlUsdM": 6,
+     "live": false
+    },
+    {
+     "rank": 38,
+     "name": "CLever",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "clever.aladdin.club",
+     "tvlUsdM": 6,
+     "live": false
+    },
+    {
+     "rank": 39,
+     "name": "Quarry",
+     "chains": [
+      "Solana"
+     ],
+     "site": "quarry.so",
+     "tvlUsdM": 5,
+     "live": false
+    },
+    {
+     "rank": 40,
+     "name": "Mezzanine",
+     "chains": [
+      "Ethereum",
+      "Solana"
+     ],
+     "site": "mezz.finance",
+     "tvlUsdM": 5,
+     "live": false
+    },
+    {
+     "rank": 41,
+     "name": "Vectis Finance",
+     "chains": [
+      "Solana",
+      "Ethereum"
+     ],
+     "site": "vectis.finance",
+     "tvlUsdM": 5,
+     "live": false
+    },
+    {
+     "rank": 42,
+     "name": "Penpie",
+     "chains": [
+      "Arbitrum",
+      "Ethereum",
+      "Hyperliquid L1"
+     ],
+     "site": "pendle.magpiexyz.io",
+     "tvlUsdM": 5,
+     "live": false
+    },
+    {
+     "rank": 43,
+     "name": "Tranchess Yield",
+     "chains": [
+      "Binance",
+      "Scroll",
+      "Ethereum"
+     ],
+     "site": "tranchess.com",
+     "tvlUsdM": 5,
+     "live": false
+    },
+    {
+     "rank": 44,
+     "name": "Toros",
+     "chains": [
+      "Arbitrum",
+      "Base",
+      "Optimism"
+     ],
+     "site": "toros.finance",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 45,
+     "name": "Troves",
+     "chains": [
+      "Starknet"
+     ],
+     "site": "troves.fi",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 46,
+     "name": "Mole",
+     "chains": [
+      "Sui",
+      "Aptos"
+     ],
+     "site": "mole.fi",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 47,
+     "name": "Faiyah Staking",
+     "chains": [
+      "Xphere"
+     ],
+     "site": "",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 48,
+     "name": "Llama Airforce",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "llama.airforce",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 49,
+     "name": "Turbo Loop",
+     "chains": [
+      "Binance"
+     ],
+     "site": "turboloop.io",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 50,
+     "name": "WOOFi Earn",
+     "chains": [
+      "Arbitrum",
+      "Optimism",
+      "Binance"
+     ],
+     "site": "woofi.com",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 51,
+     "name": "Bunny",
+     "chains": [
+      "Binance",
+      "Polygon"
+     ],
+     "site": "pancakebunny.finance",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 52,
+     "name": "Pirex",
+     "chains": [
+      "Ethereum",
+      "Arbitrum"
+     ],
+     "site": "pirex.io",
+     "tvlUsdM": 3,
+     "live": false
+    },
+    {
+     "rank": 53,
+     "name": "Reflect Tranches",
+     "chains": [
+      "Solana"
+     ],
+     "site": "tranches.reflect.money",
+     "tvlUsdM": 3,
+     "live": false
+    },
+    {
+     "rank": 54,
+     "name": "Saffron Vaults",
+     "chains": [
+      "Ethereum",
+      "Robinhood Chain",
+      "Arbitrum"
+     ],
+     "site": "saffron.finance",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 55,
+     "name": "Sunny",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 56,
+     "name": "Universe XYZ",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 57,
+     "name": "Ethena tsUSDe",
+     "chains": [
+      "TON"
+     ],
+     "site": "app.ethena.fi",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 58,
+     "name": "Sushi BentoBox",
+     "chains": [
+      "Arbitrum",
+      "Ethereum",
+      "Polygon"
+     ],
+     "site": "sushi.com",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 59,
+     "name": "Ledgity Yield",
+     "chains": [
+      "Base",
+      "Linea",
+      "Arbitrum"
+     ],
+     "site": "ledgity.finance",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 60,
+     "name": "RateX DEX",
+     "chains": [
+      "Solana",
+      "Binance"
+     ],
+     "site": "",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 61,
+     "name": "Nexus Mutual RWI Vault",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "app.nexusmutual.io",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 62,
+     "name": "Rank Trading",
+     "chains": [
+      "Binance"
+     ],
+     "site": "rank.trading",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 63,
+     "name": "Dexalot OmniVaults",
+     "chains": [
+      "Dexalot",
+      "Avalanche",
+      "Arbitrum"
+     ],
+     "site": "app.dexalot.com",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 64,
+     "name": "Gro",
+     "chains": [
+      "Ethereum",
+      "Avalanche"
+     ],
+     "site": "",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 65,
+     "name": "Planet Farm",
+     "chains": [
+      "Binance"
+     ],
+     "site": "app.planet.finance",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 66,
+     "name": "TermFinance Vaults",
+     "chains": [
+      "Avalanche",
+      "Ethereum",
+      "Plasma"
+     ],
+     "site": "term.finance",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 67,
+     "name": "Rujira AMM Strategies",
+     "chains": [
+      "Thorchain"
+     ],
+     "site": "rujira.network",
+     "tvlUsdM": 2,
+     "live": false
+    }
+   ]
+  },
+  {
+   "id": "prediction",
+   "label": "Prediction markets",
+   "defillamaCategory": "Prediction Market",
+   "items": [
+    {
+     "rank": 1,
+     "name": "Polymarket International",
+     "chains": [
+      "Polygon"
+     ],
+     "site": "polymarket.com",
+     "tvlUsdM": 316,
+     "live": true
+    },
+    {
+     "rank": 2,
+     "name": "Rain",
+     "chains": [
+      "Arbitrum"
+     ],
+     "site": "rain.one",
+     "tvlUsdM": 10,
+     "live": false
+    },
+    {
+     "rank": 3,
+     "name": "Predict Fun",
+     "chains": [
+      "Binance",
+      "Blast"
+     ],
+     "site": "predict.fun",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 4,
+     "name": "OPINION",
+     "chains": [
+      "Binance"
+     ],
+     "site": "app.opinion.trade",
+     "tvlUsdM": 3,
+     "live": false
+    },
+    {
+     "rank": 5,
+     "name": "Pascal",
+     "chains": [
+      "Solana"
+     ],
+     "site": "pascal.trade",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 6,
+     "name": "PredictStreet",
+     "chains": [
+      "ADI"
+     ],
+     "site": "adipredictstreet.com",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 7,
+     "name": "Sport.fun",
+     "chains": [
+      "Base"
+     ],
+     "site": "pro.sport.fun",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 8,
+     "name": "Levr Bet",
+     "chains": [
+      "Monad"
+     ],
+     "site": "levr.bet",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 9,
+     "name": "Trueo",
+     "chains": [
+      "Base"
+     ],
+     "site": "trueo.com",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 10,
+     "name": "Augur",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "augur.net",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 11,
+     "name": "Liquidity House",
+     "chains": [
+      "Etherlink"
+     ],
+     "site": "liquidity.house",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 12,
+     "name": "Overtime",
+     "chains": [
+      "Arbitrum",
+      "Base",
+      "Optimism"
+     ],
+     "site": "overtimemarkets.xyz",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 13,
+     "name": "Meridian Predict",
+     "chains": [
+      "Robinhood Chain"
+     ],
+     "site": "app.meridian.xyz",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 14,
+     "name": "Gnosis Protocol v1",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "gnosis.io",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 15,
+     "name": "Zethr",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 16,
+     "name": "PRDT",
+     "chains": [
+      "Ethereum",
+      "Binance",
+      "Polygon"
+     ],
+     "site": "prdt.finance",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 17,
+     "name": "Seer",
+     "chains": [
+      "xDai",
+      "Ethereum"
+     ],
+     "site": "seer.pm",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 18,
+     "name": "Limitless Exchange",
+     "chains": [
+      "Base"
+     ],
+     "site": "limitless.exchange",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 19,
+     "name": "world",
+     "chains": [
+      "Solana"
+     ],
+     "site": "world.xyz",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 20,
+     "name": "PredictEX",
+     "chains": [
+      "Base"
+     ],
+     "site": "predictex.com",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 21,
+     "name": "Probable",
+     "chains": [
+      "Binance"
+     ],
+     "site": "probable.markets",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 22,
+     "name": "Myriad Markets",
+     "chains": [
+      "Abstract",
+      "Binance",
+      "Linea"
+     ],
+     "site": "myriad.markets",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 23,
+     "name": "Wager Predict",
+     "chains": [
+      "Binance"
+     ],
+     "site": "wagerpredict.com",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 24,
+     "name": "Alpha Arcade",
+     "chains": [
+      "Algorand"
+     ],
+     "site": "alphaarcade.com",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 25,
+     "name": "PRED",
+     "chains": [
+      "Base"
+     ],
+     "site": "pred.app",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 26,
+     "name": "Azuro",
+     "chains": [
+      "Polygon",
+      "Linea",
+      "Arbitrum"
+     ],
+     "site": "azuro.org",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 27,
+     "name": "Kizzy",
+     "chains": [
+      "Monad"
+     ],
+     "site": "kizzy.io",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 28,
+     "name": "Hedgehog Markets",
+     "chains": [
+      "Solana",
+      "Eclipse"
+     ],
+     "site": "hedgehog.markets",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 29,
+     "name": "Divvy.Bet",
+     "chains": [
+      "Solana"
+     ],
+     "site": "app.divvy.bet",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 30,
+     "name": "PredMart",
+     "chains": [
+      "Base",
+      "Polygon"
+     ],
+     "site": "predmart.com",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 31,
+     "name": "Polkamarkets",
+     "chains": [
+      "Ethereum",
+      "Polygon",
+      "Moonriver"
+     ],
+     "site": "polkamarkets.com",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 32,
+     "name": "Whale Game",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 33,
+     "name": "Clutch Markets Predictions",
+     "chains": [
+      "ApeChain",
+      "Arbitrum"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 34,
+     "name": "Entropyfi",
+     "chains": [
+      "Polygon"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 35,
+     "name": "SynStation",
+     "chains": [
+      "Soneium",
+      "Ethereum",
+      "Astar"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 36,
+     "name": "Precog Markets",
+     "chains": [
+      "Base",
+      "Arbitrum"
+     ],
+     "site": "core.precog.markets",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 37,
+     "name": "DeeppDAO",
+     "chains": [
+      "Arbitrum"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 38,
+     "name": "PredX Ai",
+     "chains": [
+      "Base",
+      "Bitlayer",
+      "Binance"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 39,
+     "name": "Punk.Coffee",
+     "chains": [
+      "Binance"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 40,
+     "name": "Prophet",
+     "chains": [
+      "Obyte"
+     ],
+     "site": "prophet.ooo",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 41,
+     "name": "Seeryx",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 42,
+     "name": "Hot Take",
+     "chains": [
+      "Base"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 43,
+     "name": "Jackson Protocol",
+     "chains": [
+      "Sui"
+     ],
+     "site": "app.jackson.io",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 44,
+     "name": "Hoodbets",
+     "chains": [
+      "Robinhood Chain"
+     ],
+     "site": "hoodbets.xyz",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 45,
+     "name": "ZKasino",
+     "chains": [
+      "Polygon",
+      "Arbitrum",
+      "Binance"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 46,
+     "name": "Xmarket",
+     "chains": [
+      "Binance"
+     ],
+     "site": "xmarket.app",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 47,
+     "name": "Belief Market",
+     "chains": [
+      "Binance",
+      "Base"
+     ],
+     "site": "belief.market",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 48,
+     "name": "SuiMarket",
+     "chains": [
+      "Sui"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 49,
+     "name": "Bodega Market",
+     "chains": [
+      "Cardano"
+     ],
+     "site": "bodegamarket.io",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 50,
+     "name": "NewSight",
+     "chains": [
+      "Pharos"
+     ],
+     "site": "newsight.market",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 51,
+     "name": "OTHERWISE",
+     "chains": [
+      "Base"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 52,
+     "name": "PFWA Markets",
+     "chains": [
+      "Robinhood Chain"
+     ],
+     "site": "pfwa.fun",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 53,
+     "name": "Perfect Pool",
+     "chains": [
+      "Base",
+      "Hyperliquid L1"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 54,
+     "name": "dripit",
+     "chains": [
+      "Avalanche"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 55,
+     "name": "HypeMarket",
+     "chains": [
+      "Supra"
+     ],
+     "site": "beta.hypemarket.trade",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 56,
+     "name": "Bubblegum",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 57,
+     "name": "BetFolio",
+     "chains": [
+      "Polygon"
+     ],
+     "site": "betfolio.co",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 58,
+     "name": "ParamX",
+     "chains": [
+      "Sui"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 59,
+     "name": "TopCut Finance",
+     "chains": [
+      "Arbitrum"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 60,
+     "name": "Nexter",
+     "chains": [
+      "Polygon",
+      "Mantle"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 61,
+     "name": "Rush Sports",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 62,
+     "name": "BlackDoor",
+     "chains": [
+      "Arbitrum"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 63,
+     "name": "Random Reward",
+     "chains": [
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 64,
+     "name": "Unihedge",
+     "chains": [
+      "Polygon"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 65,
+     "name": "LunaFi",
+     "chains": [
+      "Polygon"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 66,
+     "name": "STRATO Odds",
+     "chains": [
+      "Strato"
+     ],
+     "site": "stratoodds.com",
+     "tvlUsdM": 0,
+     "live": false
+    },
+    {
+     "rank": 67,
+     "name": "DropCopy",
+     "chains": [
+      "Solana"
+     ],
+     "site": "",
+     "tvlUsdM": 0,
+     "live": false
+    }
+   ]
+  },
+  {
+   "id": "cex",
+   "label": "Centralised exchanges",
+   "defillamaCategory": "CEX",
+   "items": [
+    {
+     "rank": 1,
+     "name": "Binance CEX",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Solana"
+     ],
+     "site": "binance.com",
+     "tvlUsdM": 126285,
+     "live": false
+    },
+    {
+     "rank": 2,
+     "name": "OKX",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "X Layer"
+     ],
+     "site": "okx.com",
+     "tvlUsdM": 28421,
+     "live": false
+    },
+    {
+     "rank": 3,
+     "name": "Bybit",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Tron"
+     ],
+     "site": "bybit.com",
+     "tvlUsdM": 14744,
+     "live": false
+    },
+    {
+     "rank": 4,
+     "name": "Bitfinex",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Tron"
+     ],
+     "site": "bitfinex.com",
+     "tvlUsdM": 14437,
+     "live": false
+    },
+    {
+     "rank": 5,
+     "name": "Robinhood",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Polygon"
+     ],
+     "site": "robinhood.com",
+     "tvlUsdM": 13726,
+     "live": false
+    },
+    {
+     "rank": 6,
+     "name": "Bitget",
+     "chains": [
+      "Bitcoin",
+      "Solana",
+      "Ethereum"
+     ],
+     "site": "bitget.com",
+     "tvlUsdM": 5914,
+     "live": false
+    },
+    {
+     "rank": 7,
+     "name": "Gate",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Binance"
+     ],
+     "site": "gate.com",
+     "tvlUsdM": 5885,
+     "live": false
+    },
+    {
+     "rank": 8,
+     "name": "Gemini",
+     "chains": [
+      "Bitcoin",
+      "Ethereum"
+     ],
+     "site": "gemini.com",
+     "tvlUsdM": 4991,
+     "live": false
+    },
+    {
+     "rank": 9,
+     "name": "Bitstamp",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Ripple"
+     ],
+     "site": "bitstamp.net",
+     "tvlUsdM": 4489,
+     "live": false
+    },
+    {
+     "rank": 10,
+     "name": "MEXC",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Solana"
+     ],
+     "site": "mexc.com",
+     "tvlUsdM": 4398,
+     "live": false
+    },
+    {
+     "rank": 11,
+     "name": "HTX",
+     "chains": [
+      "Tron",
+      "Bitcoin",
+      "Ethereum"
+     ],
+     "site": "htx.com",
+     "tvlUsdM": 3926,
+     "live": false
+    },
+    {
+     "rank": 12,
+     "name": "Deribit",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Solana"
+     ],
+     "site": "deribit.com",
+     "tvlUsdM": 3661,
+     "live": false
+    },
+    {
+     "rank": 13,
+     "name": "KuCoin",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Solana"
+     ],
+     "site": "kucoin.com",
+     "tvlUsdM": 2569,
+     "live": false
+    },
+    {
+     "rank": 14,
+     "name": "Crypto-com",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "crypto.com",
+     "tvlUsdM": 2337,
+     "live": false
+    },
+    {
+     "rank": 15,
+     "name": "HashKey Exchange",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Solana"
+     ],
+     "site": "hashkey.com",
+     "tvlUsdM": 1463,
+     "live": false
+    },
+    {
+     "rank": 16,
+     "name": "Bitkub",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Ripple"
+     ],
+     "site": "bitkub.com",
+     "tvlUsdM": 1371,
+     "live": false
+    },
+    {
+     "rank": 17,
+     "name": "Poloniex",
+     "chains": [
+      "Ethereum",
+      "Ripple",
+      "Polygon"
+     ],
+     "site": "poloniex.com",
+     "tvlUsdM": 896,
+     "live": false
+    },
+    {
+     "rank": 18,
+     "name": "SwissBorg",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Solana"
+     ],
+     "site": "swissborg.com",
+     "tvlUsdM": 812,
+     "live": false
+    },
+    {
+     "rank": 19,
+     "name": "OSL Exchange",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Solana"
+     ],
+     "site": "osl.com",
+     "tvlUsdM": 677,
+     "live": false
+    },
+    {
+     "rank": 20,
+     "name": "BingX",
+     "chains": [
+      "Bitcoin",
+      "Binance",
+      "Solana"
+     ],
+     "site": "bingx.com",
+     "tvlUsdM": 548,
+     "live": false
+    },
+    {
+     "rank": 21,
+     "name": "Backpack",
+     "chains": [
+      "Solana",
+      "Bitcoin",
+      "Ethereum"
+     ],
+     "site": "backpack.exchange",
+     "tvlUsdM": 520,
+     "live": false
+    },
+    {
+     "rank": 22,
+     "name": "Korbit",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Ripple"
+     ],
+     "site": "korbit.co.kr",
+     "tvlUsdM": 478,
+     "live": false
+    },
+    {
+     "rank": 23,
+     "name": "Indodax",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Solana"
+     ],
+     "site": "indodax.com",
+     "tvlUsdM": 478,
+     "live": false
+    },
+    {
+     "rank": 24,
+     "name": "Bitvavo",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Hyperliquid L1"
+     ],
+     "site": "bitvavo.com",
+     "tvlUsdM": 319,
+     "live": false
+    },
+    {
+     "rank": 25,
+     "name": "Bitunix",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Tron"
+     ],
+     "site": "bitunix.com",
+     "tvlUsdM": 274,
+     "live": false
+    },
+    {
+     "rank": 26,
+     "name": "Phemex",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Solana"
+     ],
+     "site": "phemex.com",
+     "tvlUsdM": 267,
+     "live": false
+    },
+    {
+     "rank": 27,
+     "name": "WEEX",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Tron"
+     ],
+     "site": "weex.com",
+     "tvlUsdM": 188,
+     "live": false
+    },
+    {
+     "rank": 28,
+     "name": "CoinDCX",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Ripple"
+     ],
+     "site": "coindcx.com",
+     "tvlUsdM": 164,
+     "live": false
+    },
+    {
+     "rank": 29,
+     "name": "Bitrue",
+     "chains": [
+      "Ripple",
+      "Ethereum",
+      "Tron"
+     ],
+     "site": "bitrue.com",
+     "tvlUsdM": 130,
+     "live": false
+    },
+    {
+     "rank": 30,
+     "name": "Pionex",
+     "chains": [
+      "Bitcoin",
+      "Binance",
+      "Ethereum"
+     ],
+     "site": "pionex.com",
+     "tvlUsdM": 119,
+     "live": false
+    },
+    {
+     "rank": 31,
+     "name": "Ourbit",
+     "chains": [
+      "Bitcoin",
+      "Solana",
+      "Binance"
+     ],
+     "site": "ourbit.com",
+     "tvlUsdM": 106,
+     "live": false
+    },
+    {
+     "rank": 32,
+     "name": "Biconomy.com",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Polygon"
+     ],
+     "site": "biconomy.com",
+     "tvlUsdM": 98,
+     "live": false
+    },
+    {
+     "rank": 33,
+     "name": "VALR",
+     "chains": [
+      "Ethereum",
+      "Ripple",
+      "Solana"
+     ],
+     "site": "valr.com",
+     "tvlUsdM": 88,
+     "live": false
+    },
+    {
+     "rank": 34,
+     "name": "BloFin",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Tron"
+     ],
+     "site": "blofin.com",
+     "tvlUsdM": 78,
+     "live": false
+    },
+    {
+     "rank": 35,
+     "name": "Toobit",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "toobit.com",
+     "tvlUsdM": 69,
+     "live": false
+    },
+    {
+     "rank": 36,
+     "name": "BYDFi",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Ripple"
+     ],
+     "site": "bydfi.com",
+     "tvlUsdM": 67,
+     "live": false
+    },
+    {
+     "rank": 37,
+     "name": "Coinstore",
+     "chains": [
+      "Bitcoin",
+      "Solana",
+      "Binance"
+     ],
+     "site": "coinstore.com",
+     "tvlUsdM": 55,
+     "live": false
+    },
+    {
+     "rank": 38,
+     "name": "Gate US",
+     "chains": [
+      "Ethereum",
+      "Solana",
+      "Binance"
+     ],
+     "site": "gate.com",
+     "tvlUsdM": 54,
+     "live": false
+    },
+    {
+     "rank": 39,
+     "name": "BigONE",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Tron"
+     ],
+     "site": "big.one",
+     "tvlUsdM": 52,
+     "live": false
+    },
+    {
+     "rank": 40,
+     "name": "Coin8",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "",
+     "tvlUsdM": 48,
+     "live": false
+    },
+    {
+     "rank": 41,
+     "name": "Niza",
+     "chains": [
+      "Bitcoin",
+      "Ethereum"
+     ],
+     "site": "",
+     "tvlUsdM": 46,
+     "live": false
+    },
+    {
+     "rank": 42,
+     "name": "OrangeX",
+     "chains": [
+      "Bitcoin",
+      "Ethereum"
+     ],
+     "site": "orangex.com",
+     "tvlUsdM": 42,
+     "live": false
+    },
+    {
+     "rank": 43,
+     "name": "Zoomex",
+     "chains": [
+      "Ethereum",
+      "Ripple",
+      "Binance"
+     ],
+     "site": "zoomex.com",
+     "tvlUsdM": 38,
+     "live": false
+    },
+    {
+     "rank": 44,
+     "name": "Byte Exchange",
+     "chains": [
+      "Bitcoin",
+      "Ethereum"
+     ],
+     "site": "bexc.io",
+     "tvlUsdM": 37,
+     "live": false
+    },
+    {
+     "rank": 45,
+     "name": "BitKan",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Tron"
+     ],
+     "site": "bitkan.com",
+     "tvlUsdM": 31,
+     "live": false
+    },
+    {
+     "rank": 46,
+     "name": "Okcoin",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Tron"
+     ],
+     "site": "okcoin.com",
+     "tvlUsdM": 26,
+     "live": false
+    },
+    {
+     "rank": 47,
+     "name": "Hibt",
+     "chains": [
+      "Tron",
+      "Ethereum",
+      "Bitcoin"
+     ],
+     "site": "hibt.com",
+     "tvlUsdM": 18,
+     "live": false
+    },
+    {
+     "rank": 48,
+     "name": "BitVenus",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Tron"
+     ],
+     "site": "bvox.com",
+     "tvlUsdM": 17,
+     "live": false
+    },
+    {
+     "rank": 49,
+     "name": "Flipster",
+     "chains": [
+      "Ethereum",
+      "Binance",
+      "Tron"
+     ],
+     "site": "flipster.io",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 50,
+     "name": "Nexo",
+     "chains": [
+      "Ethereum",
+      "Binance",
+      "Polygon"
+     ],
+     "site": "nexo.com",
+     "tvlUsdM": 16,
+     "live": false
+    },
+    {
+     "rank": 51,
+     "name": "CoinEx",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Tron"
+     ],
+     "site": "coinex.com",
+     "tvlUsdM": 15,
+     "live": false
+    },
+    {
+     "rank": 52,
+     "name": "Bitlo",
+     "chains": [
+      "Ethereum",
+      "Ripple",
+      "Tron"
+     ],
+     "site": "bitlo.com",
+     "tvlUsdM": 13,
+     "live": false
+    },
+    {
+     "rank": 53,
+     "name": "ProBit Global",
+     "chains": [
+      "Bitcoin",
+      "Binance",
+      "Ethereum"
+     ],
+     "site": "probit.com",
+     "tvlUsdM": 12,
+     "live": false
+    },
+    {
+     "rank": 54,
+     "name": "Hotcoin",
+     "chains": [
+      "Tron",
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "hotcoin.com",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 55,
+     "name": "HashKey Global",
+     "chains": [
+      "Binance",
+      "Ethereum",
+      "Bitcoin"
+     ],
+     "site": "hashkey.com",
+     "tvlUsdM": 9,
+     "live": false
+    },
+    {
+     "rank": 56,
+     "name": "LBank",
+     "chains": [
+      "Bitcoin",
+      "Ethereum"
+     ],
+     "site": "lbank.com",
+     "tvlUsdM": 8,
+     "live": false
+    },
+    {
+     "rank": 57,
+     "name": "LeveX",
+     "chains": [
+      "Ethereum",
+      "Binance",
+      "Solana"
+     ],
+     "site": "levex.com",
+     "tvlUsdM": 8,
+     "live": false
+    },
+    {
+     "rank": 58,
+     "name": "NBX",
+     "chains": [
+      "Ethereum",
+      "Bitcoin",
+      "Cardano"
+     ],
+     "site": "nbx.com",
+     "tvlUsdM": 8,
+     "live": false
+    },
+    {
+     "rank": 59,
+     "name": "P2PB2B",
+     "chains": [
+      "Bitcoin",
+      "Ethereum",
+      "Binance"
+     ],
+     "site": "p2pb2b.com",
+     "tvlUsdM": 5,
+     "live": false
+    },
+    {
+     "rank": 60,
+     "name": "Tothemoon",
+     "chains": [
+      "Tron",
+      "Bitcoin",
+      "Binance"
+     ],
+     "site": "tothemoon.com",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 61,
+     "name": "BitMart",
+     "chains": [
+      "Ethereum",
+      "Binance",
+      "Solana"
+     ],
+     "site": "bitmart.com",
+     "tvlUsdM": 4,
+     "live": false
+    },
+    {
+     "rank": 62,
+     "name": "Webot",
+     "chains": [
+      "Ethereum",
+      "Hyperliquid L1",
+      "Solana"
+     ],
+     "site": "webot.com",
+     "tvlUsdM": 3,
+     "live": false
+    },
+    {
+     "rank": 63,
+     "name": "Coinsquare",
+     "chains": [
+      "Cardano",
+      "Ethereum",
+      "Ripple"
+     ],
+     "site": "coinsquare.com",
+     "tvlUsdM": 3,
+     "live": false
+    },
+    {
+     "rank": 64,
+     "name": "WOO X",
+     "chains": [
+      "Ethereum",
+      "Binance",
+      "Tron"
+     ],
+     "site": "x.woo.org",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 65,
+     "name": "BTSE",
+     "chains": [
+      "Bitcoin"
+     ],
+     "site": "btse.com",
+     "tvlUsdM": 2,
+     "live": false
+    },
+    {
+     "rank": 66,
+     "name": "NonKYC",
+     "chains": [
+      "Arbitrum",
+      "Avalanche",
+      "Ethereum"
+     ],
+     "site": "nonkyc.io",
+     "tvlUsdM": 1,
+     "live": false
+    },
+    {
+     "rank": 67,
+     "name": "CEX.IO",
+     "chains": [
+      "Ethereum",
+      "Tron",
+      "Binance"
+     ],
+     "site": "cex.io",
+     "tvlUsdM": 1,
+     "live": false
+    }
+   ]
+  }
+ ]
+}

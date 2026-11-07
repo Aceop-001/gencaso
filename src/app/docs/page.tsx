@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Flag } from "@/components/Flag";
 import { ProtocolLogo } from "@/components/ProtocolLogo";
+import { RoadmapLists, roadmapMeta } from "@/components/RoadmapLists";
 import { DocTable, Section, Subpage } from "@/components/Subpage";
 import { COUNTRY_DOCS } from "@/lib/docsCountries";
 import { PROTOCOLS } from "@/lib/registry";
@@ -22,6 +23,7 @@ const SECTIONS = [
   { id: "cefi", title: "CeFi mode (exchanges)" },
   { id: "results", title: "Reading your results" },
   { id: "protocols", title: "Supported protocols" },
+  { id: "roadmap", title: "Roadmap (DefiLlama top 67)" },
   { id: "countries", title: "Countries & tax rules" },
   { id: "calculations", title: "How the numbers work" },
   { id: "downloads", title: "Downloads" },
@@ -148,6 +150,12 @@ export default function DocsPage() {
           ))}
         </div>
         <p><strong>Planned</strong> ({planned.length}): {planned.map((p) => p.name).join(", ")}. These are not connected yet.</p>
+      </Section>
+
+      <Section id="roadmap" title="Roadmap (DefiLlama top 67)">
+        <p>Where Gencaso is heading: the top {roadmapMeta.perCategory} protocols in each category on DefiLlama, ranked by total value locked (snapshot {roadmapMeta.fetchedOn}). <strong className="text-good">Live</strong> means supported and verified in Gencaso today; everything else is planned. Each one is added only after its numbers are checked against real accounts.</p>
+        <RoadmapLists />
+        <p className="text-xs text-ink-3">Source: {roadmapMeta.source}. Spot DEXs, lending, staking and yield also need Gencaso&apos;s upcoming spot cost-basis engine.</p>
       </Section>
 
       <Section id="countries" title="Countries & tax rules">

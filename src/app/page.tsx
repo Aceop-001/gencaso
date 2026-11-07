@@ -8,6 +8,8 @@ import { LivingLogo } from "@/components/LivingLogo";
 import { ProtocolLogo } from "@/components/ProtocolLogo";
 import { Results } from "@/components/Results";
 import { MoreMenu } from "@/components/MoreMenu";
+import { roadmapPlannedCount } from "@/components/RoadmapLists";
+import Link from "next/link";
 import { ScanSequence } from "@/components/ScanSequence";
 import { SiteFooter } from "@/components/Socials";
 import { WalletBar } from "@/components/WalletBar";
@@ -89,7 +91,6 @@ export default function Home() {
   };
 
   const live = PROTOCOLS.filter((p) => p.status !== "planned");
-  const planned = PROTOCOLS.filter((p) => p.status === "planned");
 
   return (
     <main className="relative min-h-dvh overflow-x-hidden">
@@ -149,9 +150,9 @@ export default function Home() {
                           <span className="text-ink-3">{p.status === "live" ? "live" : "beta · unverified"}</span>
                         </span>
                       ))}
-                      <span className="rounded-full border border-line bg-bg/40 px-3 py-1 text-ink-3 backdrop-blur" title={planned.map((p) => p.name).join(", ")}>
-                        +{planned.length} planned
-                      </span>
+                      <Link href="/docs#roadmap" className="rounded-full border border-line bg-bg/40 px-3 py-1 text-ink-3 backdrop-blur transition hover:border-line-strong hover:text-white" title="DefiLlama's top 67 per category: the Gencaso roadmap">
+                        +{roadmapPlannedCount} on the roadmap
+                      </Link>
                     </div>
                     )}
                   </motion.div>
