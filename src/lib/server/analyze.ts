@@ -2,6 +2,7 @@ import { dedupe } from "../engine/summary";
 import type { FinancialEvent, FxTable, OpenPosition, ProviderReport, WalletDataset } from "../engine/schema";
 import { fetchFxTable, FX_CURRENCIES } from "../fx/fx";
 import { BulkDataProvider } from "../providers/bulk";
+import { GMXDataProvider } from "../providers/gmx";
 import { HertzFlowDataProvider } from "../providers/hertzflow";
 import { HyperliquidDataProvider } from "../providers/hyperliquid";
 import { MockDataProvider } from "../providers/mock";
@@ -21,7 +22,7 @@ import { meteredHttp } from "./http";
 
 const FRESH_MS = 10 * 60_000;
 const INCREMENTAL: Record<string, boolean> = { hyperliquid: true, polymarket: false, mock: false };
-const PROVIDERS: DataProvider[] = [MockDataProvider, HyperliquidDataProvider, PolymarketDataProvider, BulkDataProvider, HertzFlowDataProvider, OpenSeaDataProvider];
+const PROVIDERS: DataProvider[] = [MockDataProvider, HyperliquidDataProvider, PolymarketDataProvider, BulkDataProvider, HertzFlowDataProvider, GMXDataProvider, OpenSeaDataProvider];
 
 /** Bump when the normalized event shape changes, so older cached events are refetched in full. */
 const EVENT_SCHEMA = 3; // 2: txHash + market slug for source links; 3: NFT events

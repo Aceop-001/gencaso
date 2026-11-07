@@ -34,7 +34,7 @@ export function txUrl(e: FinancialEvent): string | undefined {
   if (e.protocol === "hyperliquid") return `https://app.hyperliquid.xyz/explorer/tx/${e.txHash}`;
   if (e.protocol === "polymarket") return `https://polygonscan.com/tx/${e.txHash}`;
   if (e.protocol === "hertzflow") return `https://bscscan.com/tx/${e.txHash}`;
-  if (e.protocol === "opensea") return EVM_EXPLORER[e.chain] ? `${EVM_EXPLORER[e.chain]}${e.txHash}` : undefined;
+  if (e.protocol === "opensea" || e.protocol === "gmx") return EVM_EXPLORER[e.chain] ? `${EVM_EXPLORER[e.chain]}${e.txHash}` : undefined;
   return undefined;
 }
 
