@@ -167,7 +167,7 @@ async function drawCard(d: TaxCardData, flagSvg: string | null): Promise<Blob> {
   // Footer: wallet, module, builder
   ctx.font = `400 16px ${mono}`;
   ctx.fillStyle = d.isDemo ? "#ffc566" : "#6a7aa6";
-  ctx.fillText(`${d.isDemo ? "Demo wallet · mock data" : shortAddr(d.address)} · module ${d.moduleVersion} · for comparison only`, 64, 616);
+  ctx.fillText(`${d.isDemo ? "Demo wallet · mock data" : /\s/.test(d.address) ? d.address : shortAddr(d.address)} · module ${d.moduleVersion} · for comparison only`, 64, 616);
   ctx.textAlign = "right";
   ctx.font = `500 17px ${sans}`;
   ctx.fillStyle = "#a3b1d6";

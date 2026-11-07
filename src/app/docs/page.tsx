@@ -19,6 +19,7 @@ const PROVISIONAL = new Set(["CN", "ID", "PK", "KR", "LK", "TR", "UA", "VN"]);
 const SECTIONS = [
   { id: "overview", title: "Overview" },
   { id: "quick-start", title: "Quick start" },
+  { id: "cefi", title: "CeFi mode (exchanges)" },
   { id: "results", title: "Reading your results" },
   { id: "protocols", title: "Supported protocols" },
   { id: "countries", title: "Countries & tax rules" },
@@ -67,6 +68,28 @@ export default function DocsPage() {
           <li><strong>Download</strong> the accountant spreadsheet or a shareable tax card.</li>
         </ol>
         <p>No wallet handy? Click <strong>Try the demo wallet</strong> on the homepage for a clearly labelled synthetic dataset.</p>
+      </Section>
+
+      <Section id="cefi" title="CeFi mode (exchanges)">
+        <p>Centralised exchanges don&apos;t publish your trades, so in <strong>CeFi mode</strong> you upload an export instead of pasting a wallet. The file is read <strong>in your browser</strong>: your trades never leave your device. Only the dates are sent to the server, to fetch exchange rates.</p>
+        <ol>
+          <li>Switch to <strong>CeFi · exchanges</strong> on the homepage and click <strong>Download the CSV template</strong>.</li>
+          <li>Copy rows from your exchange&apos;s futures P&amp;L or transaction-history export into it. Several files and exchanges can be uploaded together.</li>
+          <li>Drop the file in, pick your country and click <strong>Calculate</strong>.</li>
+        </ol>
+        <DocTable
+          head={["Column", "What to enter"]}
+          rows={[
+            [<code key="d">date</code>, "UTC date or date-time, e.g. 2026-03-10 or 2026-03-10T14:05:00Z"],
+            [<code key="e">exchange</code>, "e.g. Binance (optional)"],
+            [<code key="m">market</code>, "e.g. BTCUSDT (optional)"],
+            [<code key="t">type</code>, "realized_pnl, funding, fee, deposit or withdrawal"],
+            [<code key="a">amount_usd</code>, "realized_pnl and funding: signed (+ profit or received, − loss or paid). fee, deposit, withdrawal: positive. USDT and USDC count as USD."],
+            [<code key="f">fee_usd</code>, "Optional fee paid on a realized_pnl row"],
+            [<code key="n">note</code>, "Optional"],
+          ]}
+        />
+        <p>Rows that can&apos;t be read are skipped and listed with their line number; nothing is guessed. Holding periods aren&apos;t in the template, so gains are treated as short-term. <strong>Automatic import</strong> of each exchange&apos;s own export format (Binance, OKX, Bybit, Coinbase, Kraken and more) is coming, and each one will be checked against real export files first.</p>
       </Section>
 
       <Section id="results" title="Reading your results">

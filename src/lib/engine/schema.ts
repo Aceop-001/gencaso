@@ -11,6 +11,7 @@
 
 export type ProtocolId =
   | "mock"
+  | "cefi"
   | "hyperliquid"
   | "polymarket"
   | "bulk"
@@ -149,6 +150,8 @@ export interface WalletDataset {
   address: string;
   /** Combined report: every wallet included, in the order given. Absent for a single wallet. */
   wallets?: string[];
+  /** CeFi mode: built from uploaded exchange files instead of a wallet */
+  cefi?: { files: string[]; exchanges: string[] };
   isDemo: boolean;
   fetchedAt: number;
   events: FinancialEvent[];

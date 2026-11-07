@@ -216,6 +216,25 @@ const DATA_SOURCES: ProtocolEntry[] = [
       "No NFT data is available from the Surf Data API.",
     ],
   },
+  {
+    id: "cefi",
+    name: "Exchange CSV",
+    category: "perp",
+    chains: ["Centralised exchanges"],
+    website: "https://gencaso.xyz/docs#cefi",
+    docs: "https://gencaso.xyz/docs#cefi",
+    endpoints: [],
+    accountId: "Your own export file, read in your browser",
+    addressKinds: [],
+    history: "Whatever the uploaded file contains.",
+    txTypes: ["Realized P&L", "Funding", "Fees", "Deposits and withdrawals"],
+    status: "live",
+    limitations: [
+      "Amounts are taken as entered (USD; USDT and USDC count as USD) and are not checked against the exchange.",
+      "Holding periods aren't in the template, so gains are treated as short-term.",
+      "Automatic import of each exchange's own export format is coming; until then use the Gencaso template.",
+    ],
+  },
 ];
 
 export const protocolById = (id: ProtocolId) => PROTOCOLS.find((p) => p.id === id) ?? DATA_SOURCES.find((p) => p.id === id);

@@ -155,7 +155,7 @@ export function Results({ dataset, country, onCountry, onReset, onRefresh }: { d
                   netTradingResult: s.netTradingResult,
                   taxableUsd: toUsd(result.taxableLocal),
                   effective,
-                  address: walletsOf(dataset).length > 1 ? walletLabel(dataset) : dataset.address,
+                  address: walletsOf(dataset).length > 1 || dataset.cefi ? walletLabel(dataset) : dataset.address,
                   isDemo: !!dataset.isDemo,
                   moduleVersion: result.moduleVersion,
                   provisional: result.provisional,
@@ -228,7 +228,7 @@ export function Results({ dataset, country, onCountry, onReset, onRefresh }: { d
 
       <div className="flex flex-wrap justify-center gap-3 pb-8">
         <button onClick={onReset} className="rounded-full border border-line px-5 py-2 text-sm text-ink-2 hover:border-line-strong hover:text-ink">Analyse another wallet</button>
-        {!dataset.isDemo && <button onClick={onRefresh} className="rounded-full border border-line px-5 py-2 text-sm text-ink-3 hover:text-ink-2">Sync new activity</button>}
+        {!dataset.isDemo && !dataset.cefi && <button onClick={onRefresh} className="rounded-full border border-line px-5 py-2 text-sm text-ink-3 hover:text-ink-2">Sync new activity</button>}
       </div>
     </motion.div>
   );

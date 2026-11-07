@@ -7,8 +7,9 @@ export const MAX_WALLETS = 5;
 /** Every wallet in a dataset: the combined list, or the single address. */
 export const walletsOf = (ds: WalletDataset) => ds.wallets ?? [ds.address];
 
-/** "0x15ba…7b29" for one wallet, "3 wallets" for a combined report. */
-export const walletLabel = (ds: WalletDataset) => (ds.isDemo ? "demo wallet" : walletsOf(ds).length > 1 ? `${walletsOf(ds).length} wallets` : shortAddr(ds.address));
+/** "0x15ba…7b29" for one wallet, "3 wallets" for a combined report, "Exchange CSV · Binance" in CeFi mode. */
+export const walletLabel = (ds: WalletDataset) =>
+  ds.cefi ? `Exchange CSV${ds.cefi.exchanges.length ? ` · ${ds.cefi.exchanges.join(", ")}` : ""}` : ds.isDemo ? "demo wallet" : walletsOf(ds).length > 1 ? `${walletsOf(ds).length} wallets` : shortAddr(ds.address);
 
 function mergeFx(tables: FxTable[]): FxTable {
   const rates: FxTable["rates"] = {};
